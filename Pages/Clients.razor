@@ -1,0 +1,40 @@
+﻿@page "/clients"
+
+<h1>Clients</h1>
+@inject dotNet_project.Data.IClientService ClientService;
+
+<table>
+    <thead>
+        <tr>
+            <td>
+                Id
+            </td>
+            <td>
+                Name
+            </td>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach(var client in clients)
+        {
+        <tr>
+            <td>
+                @client.Id
+            </td>
+            <td>
+                @client.Name
+            </td>
+        </tr>
+        }
+    </tbody>
+</table>
+
+@code {
+
+    private List<dotNet_project.Data.Client> clients;
+
+    protected override void OnInitialized()
+    {
+        clients = ClientService.GetClients();
+    }
+}
