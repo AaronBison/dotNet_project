@@ -82,6 +82,20 @@ using DataLibrary;
 #line default
 #line hidden
 #nullable disable
+#nullable restore
+#line 4 "D:\-EMTE-\4.ev\4_II\.NET\dotNet_project\dotNet_project\Pages\Clients.razor"
+using dotNet_project.Models;
+
+#line default
+#line hidden
+#nullable disable
+#nullable restore
+#line 5 "D:\-EMTE-\4.ev\4_II\.NET\dotNet_project\dotNet_project\Pages\Clients.razor"
+using Microsoft.Extensions.Configuration;
+
+#line default
+#line hidden
+#nullable disable
     [Microsoft.AspNetCore.Components.RouteAttribute("/clients")]
     public partial class Clients : Microsoft.AspNetCore.Components.ComponentBase
     {
@@ -91,20 +105,21 @@ using DataLibrary;
         }
         #pragma warning restore 1998
 #nullable restore
-#line 39 "D:\-EMTE-\4.ev\4_II\.NET\dotNet_project\dotNet_project\Pages\Clients.razor"
+#line 38 "D:\-EMTE-\4.ev\4_II\.NET\dotNet_project\dotNet_project\Pages\Clients.razor"
        
 
-    private List<dotNet_project.Data.Client> clients;
+    private List<ClientModel> clients;
 
-    protected override void OnInitialized()
+    protected override async Task OnInitializedAsync()
     {
-        clients = ClientService.GetClients();
+        string sql = "SELECT * FROM clients";
+        clients = await _data.LoadData<ClientModel, dynamic>(sql, new { }, _config.GetConnectionString("default"));
     }
 
 #line default
 #line hidden
 #nullable disable
-        [global::Microsoft.AspNetCore.Components.InjectAttribute] private dotNet_project.Data.IClientService ClientService { get; set; }
+        [global::Microsoft.AspNetCore.Components.InjectAttribute] private IConfiguration _config { get; set; }
         [global::Microsoft.AspNetCore.Components.InjectAttribute] private IDataAcces _data { get; set; }
     }
 }

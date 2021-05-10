@@ -1,57 +1,47 @@
 ﻿@page "/clients"
 
 @using DataLibrary
+@using dotNet_project.Models
+@using Microsoft.Extensions.Configuration
+
 @inject IDataAcces _data
-@inject dotNet_project.Data.IClientService ClientService;
+@inject IConfiguration _config
+
 
 <h1>Clients</h1>
 
-<table class="table">
-    <thead>
-        <tr>
-            <td>
-                <b>
-                    Id
-                </b>
-            </td>
-            <td>
-                <b>
-                    Name
-                </b>
-            </td>
-        </tr>
-    </thead>
-    <tbody>
-        @foreach (var client in clients)
-        {
+@if (clients == null)
+{
+    <p><em>Loading...</em></p>
+}
+else
+{
+    <table class="table">
+        <thead>
             <tr>
-                <td>
-                    @client.Id
-                </td>
-                <td>
-                    @client.Name
-                </td>
+                <td><b>First Name</b></td>
+                <td><b>Last Name</b></td>
             </tr>
-        }
-    </tbody>
-</table>
+        </thead>
+        <tbody>
+            @foreach (var client in clients)
+            {
+                <tr>
+                    <td>@client.FirstName</td>
+                    <td>@client.LastName</td>
+                </tr>
+            }
+        </tbody>
+    </table>
+}
 
 @code {
 
-    private List<dotNet_project.Data.Client> clients;
-
-    protected override void OnInitialized()
-    {
-        clients = ClientService.GetClients();
-    }
-
-    //protected override async Task OnInitializedAsync()
-    //{
-    //    forecasts = await ForecastService.GetForecastAsync(DateTime.Now);
-    //}
+    private List<ClientModel> clients;
 
     protected override async Task OnInitializedAsync()
     {
-       await _data.LoadData
+        string sql = "SELECT * FROM clients";
+        clients = await _data.LoadData<ClientModel, dynamic>(sql, new { }, _config.GetConnectionString("default"));
     }
 }
