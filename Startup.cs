@@ -1,3 +1,4 @@
+using DataLibrary;
 using dotNet_project.Data;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Components;
@@ -30,6 +31,7 @@ namespace dotNet_project
             services.AddServerSideBlazor();
             services.AddSingleton<WeatherForecastService>();
             services.AddSingleton<IClientService, ClientService>();
+            services.AddSingleton<IDataAcces, DataAcces>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

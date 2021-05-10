@@ -49,3 +49,17 @@ D:\-EMTE-\4.ev\4_II\.NET\dotNet_project\dotNet_project\obj\Debug\netcoreapp3.1\d
 D:\-EMTE-\4.ev\4_II\.NET\dotNet_project\dotNet_project\obj\Debug\netcoreapp3.1\dotNet_project.csproj.CopyComplete
 D:\-EMTE-\4.ev\4_II\.NET\dotNet_project\dotNet_project\obj\Debug\netcoreapp3.1\RazorDeclaration\Pages\Clients.razor.g.cs
 D:\-EMTE-\4.ev\4_II\.NET\dotNet_project\dotNet_project\obj\Debug\netcoreapp3.1\Razor\Pages\Clients.razor.g.cs
+D:\-EMTE-\4.ev\4_II\.NET\dotNet_project\dotNet_project\bin\Debug\netcoreapp3.1\BouncyCastle.Crypto.dll
+D:\-EMTE-\4.ev\4_II\.NET\dotNet_project\dotNet_project\bin\Debug\netcoreapp3.1\Dapper.dll
+D:\-EMTE-\4.ev\4_II\.NET\dotNet_project\dotNet_project\bin\Debug\netcoreapp3.1\Google.Protobuf.dll
+D:\-EMTE-\4.ev\4_II\.NET\dotNet_project\dotNet_project\bin\Debug\netcoreapp3.1\K4os.Compression.LZ4.dll
+D:\-EMTE-\4.ev\4_II\.NET\dotNet_project\dotNet_project\bin\Debug\netcoreapp3.1\K4os.Compression.LZ4.Streams.dll
+D:\-EMTE-\4.ev\4_II\.NET\dotNet_project\dotNet_project\bin\Debug\netcoreapp3.1\K4os.Hash.xxHash.dll
+D:\-EMTE-\4.ev\4_II\.NET\dotNet_project\dotNet_project\bin\Debug\netcoreapp3.1\MySql.Data.dll
+D:\-EMTE-\4.ev\4_II\.NET\dotNet_project\dotNet_project\bin\Debug\netcoreapp3.1\Ubiety.Dns.Core.dll
+D:\-EMTE-\4.ev\4_II\.NET\dotNet_project\dotNet_project\bin\Debug\netcoreapp3.1\Zstandard.Net.dll
+D:\-EMTE-\4.ev\4_II\.NET\dotNet_project\dotNet_project\bin\Debug\netcoreapp3.1\System.Configuration.ConfigurationManager.dll
+D:\-EMTE-\4.ev\4_II\.NET\dotNet_project\dotNet_project\bin\Debug\netcoreapp3.1\System.Security.Cryptography.ProtectedData.dll
+D:\-EMTE-\4.ev\4_II\.NET\dotNet_project\dotNet_project\bin\Debug\netcoreapp3.1\runtimes\win\lib\netstandard2.0\System.Security.Cryptography.ProtectedData.dll
+D:\-EMTE-\4.ev\4_II\.NET\dotNet_project\dotNet_project\bin\Debug\netcoreapp3.1\DataLibrary.dll
+D:\-EMTE-\4.ev\4_II\.NET\dotNet_project\dotNet_project\bin\Debug\netcoreapp3.1\DataLibrary.pdb

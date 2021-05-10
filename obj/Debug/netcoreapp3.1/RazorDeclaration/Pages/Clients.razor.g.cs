@@ -75,6 +75,13 @@ using dotNet_project.Shared;
 #line default
 #line hidden
 #nullable disable
+#nullable restore
+#line 3 "D:\-EMTE-\4.ev\4_II\.NET\dotNet_project\dotNet_project\Pages\Clients.razor"
+using DataLibrary;
+
+#line default
+#line hidden
+#nullable disable
     [Microsoft.AspNetCore.Components.RouteAttribute("/clients")]
     public partial class Clients : Microsoft.AspNetCore.Components.ComponentBase
     {
@@ -84,7 +91,7 @@ using dotNet_project.Shared;
         }
         #pragma warning restore 1998
 #nullable restore
-#line 32 "D:\-EMTE-\4.ev\4_II\.NET\dotNet_project\dotNet_project\Pages\Clients.razor"
+#line 39 "D:\-EMTE-\4.ev\4_II\.NET\dotNet_project\dotNet_project\Pages\Clients.razor"
        
 
     private List<dotNet_project.Data.Client> clients;
@@ -98,6 +105,7 @@ using dotNet_project.Shared;
 #line hidden
 #nullable disable
         [global::Microsoft.AspNetCore.Components.InjectAttribute] private dotNet_project.Data.IClientService ClientService { get; set; }
+        [global::Microsoft.AspNetCore.Components.InjectAttribute] private IDataAcces _data { get; set; }
     }
 }
 #pragma warning restore 1591
