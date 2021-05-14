@@ -10,6 +10,8 @@
 
 <h1>Clients</h1>
 
+<button style="margin: 5px" class="btn btn-primary" @onclick="InsertData">Add Client</button>
+
 @if (clients == null)
 {
     <p><em>Loading...</em></p>
@@ -21,15 +23,21 @@ else
             <tr>
                 <td><b>First Name</b></td>
                 <td><b>Last Name</b></td>
+                <td><b>Operations</b></td>
             </tr>
         </thead>
         <tbody>
             @foreach (var client in clients)
             {
-                <tr>
-                    <td>@client.FirstName</td>
-                    <td>@client.LastName</td>
-                </tr>
+            <tr>
+                <td>@client.FirstName</td>
+                <td>@client.LastName</td>
+
+                <td>
+                <button style="margin: 5px;" class="btn btn-warning" @onclick="UpdateData">Update</button>
+                <button style="margin: 5px; align-content:end;" class="btn btn-danger" @onclick="DeleteData">Delete</button>
+                </td>
+            </tr>
             }
         </tbody>
     </table>
@@ -38,6 +46,33 @@ else
 @code {
 
     private List<ClientModel> clients;
+    private async Task InsertData()
+    {
+        string sql = "INSERT INTO clients (FirstName, LastName) VALUES (@FirstName, @LastName);";
+
+        await _data.SaveData(sql, new { FirstName = "Thomas", LastName = "Bison" }, _config.GetConnectionString("default"));
+
+        await OnInitializedAsync();
+    }
+
+    private async Task UpdateData()
+    {
+        string sql = "UPDATE clients set FirstName = @FirstName where LastName = @LastName";
+
+        await _data.SaveData(sql, new { FirstName = "Denko", LastName = "Corey" }, _config.GetConnectionString("default"));
+
+        await OnInitializedAsync();
+    }
+
+    private async Task DeleteData()
+    {
+        string sql = "DELETE FROM clients WHERE FirstName = @FirstName";
+
+        await _data.SaveData(sql, new { FirstName = "Thomas" }, _config.GetConnectionString("default"));
+
+        await OnInitializedAsync();
+    }
+
 
     protected override async Task OnInitializedAsync()
     {

@@ -105,10 +105,37 @@ using Microsoft.Extensions.Configuration;
         }
         #pragma warning restore 1998
 #nullable restore
-#line 38 "D:\-EMTE-\4.ev\4_II\.NET\dotNet_project\dotNet_project\Pages\Clients.razor"
+#line 44 "D:\-EMTE-\4.ev\4_II\.NET\dotNet_project\dotNet_project\Pages\Clients.razor"
        
 
     private List<ClientModel> clients;
+    private async Task InsertData()
+    {
+        string sql = "INSERT INTO clients (FirstName, LastName) VALUES (@FirstName, @LastName);";
+
+        await _data.SaveData(sql, new { FirstName = "Thomas", LastName = "Bison" }, _config.GetConnectionString("default"));
+
+        await OnInitializedAsync();
+    }
+
+    private async Task UpdateData()
+    {
+        string sql = "UPDATE clients set FirstName = @FirstName where LastName = @LastName";
+
+        await _data.SaveData(sql, new { FirstName = "Denko", LastName = "Corey" }, _config.GetConnectionString("default"));
+
+        await OnInitializedAsync();
+    }
+
+    private async Task DeleteData()
+    {
+        string sql = "DELETE FROM clients WHERE FirstName = @FirstName";
+
+        await _data.SaveData(sql, new { FirstName = "Thomas" }, _config.GetConnectionString("default"));
+
+        await OnInitializedAsync();
+    }
+
 
     protected override async Task OnInitializedAsync()
     {

@@ -1,24 +1,25 @@
-﻿using System;
+﻿using dotNet_project.Models;
+using System;
 using System.Collections.Generic;
 
 namespace dotNet_project.Data
 {
     public class ClientService : IClientService
     {
-        private List<Client> clients = new List<Client>
+        private List<ClientModel> clients = new List<ClientModel>
         {
-            new Client
+            new ClientModel
             {
-                Id = Guid.NewGuid(),
-                Name = "AaronBison"
+                FirstName = "Aaron",
+                LastName = "Bison"
             },
-            new Client
+            new ClientModel
             {
-                Id = Guid.NewGuid(),
-                Name = "RailGummy"
-            }
+                FirstName = "Thomas",
+                LastName = "Bison"
+            },
         };
-        public List<Client> GetClients()
+        public List<ClientModel> GetClients()
         {
             return clients;
         }
