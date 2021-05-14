@@ -84,14 +84,14 @@ using DataLibrary;
 #nullable disable
 #nullable restore
 #line 4 "D:\-EMTE-\4.ev\4_II\.NET\dotNet_project\dotNet_project\Pages\Clients.razor"
-using dotNet_project.Models;
+using DataLibrary.Models;
 
 #line default
 #line hidden
 #nullable disable
 #nullable restore
 #line 5 "D:\-EMTE-\4.ev\4_II\.NET\dotNet_project\dotNet_project\Pages\Clients.razor"
-using Microsoft.Extensions.Configuration;
+using dotNet_project.Models;
 
 #line default
 #line hidden
@@ -105,49 +105,36 @@ using Microsoft.Extensions.Configuration;
         }
         #pragma warning restore 1998
 #nullable restore
-#line 44 "D:\-EMTE-\4.ev\4_II\.NET\dotNet_project\dotNet_project\Pages\Clients.razor"
+#line 50 "D:\-EMTE-\4.ev\4_II\.NET\dotNet_project\dotNet_project\Pages\Clients.razor"
        
 
     private List<ClientModel> clients;
-    private async Task InsertData()
-    {
-        string sql = "INSERT INTO clients (FirstName, LastName) VALUES (@FirstName, @LastName);";
-
-        await _data.SaveData(sql, new { FirstName = "Thomas", LastName = "Bison" }, _config.GetConnectionString("default"));
-
-        await OnInitializedAsync();
-    }
-
-    private async Task UpdateData()
-    {
-        string sql = "UPDATE clients set FirstName = @FirstName where LastName = @LastName";
-
-        await _data.SaveData(sql, new { FirstName = "Denko", LastName = "Corey" }, _config.GetConnectionString("default"));
-
-        await OnInitializedAsync();
-    }
-
-    private async Task DeleteData()
-    {
-        string sql = "DELETE FROM clients WHERE FirstName = @FirstName";
-
-        await _data.SaveData(sql, new { FirstName = "Thomas" }, _config.GetConnectionString("default"));
-
-        await OnInitializedAsync();
-    }
-
+    private DisplayClientModel newClient = new DisplayClientModel();
 
     protected override async Task OnInitializedAsync()
     {
-        string sql = "SELECT * FROM clients";
-        clients = await _data.LoadData<ClientModel, dynamic>(sql, new { }, _config.GetConnectionString("default"));
+        clients = await _db.GetClients();
+    }
+
+    private async Task InsertClient()
+    {
+        ClientModel c = new ClientModel
+        {
+            FirstName = newClient.FirstName,
+            LastName = newClient.LastName
+
+        };
+        await _db.InsertClient(c);
+
+        await OnInitializedAsync();
+
+        newClient = new DisplayClientModel();
     }
 
 #line default
 #line hidden
 #nullable disable
-        [global::Microsoft.AspNetCore.Components.InjectAttribute] private IConfiguration _config { get; set; }
-        [global::Microsoft.AspNetCore.Components.InjectAttribute] private IDataAcces _data { get; set; }
+        [global::Microsoft.AspNetCore.Components.InjectAttribute] private IClientsData _db { get; set; }
     }
 }
 #pragma warning restore 1591

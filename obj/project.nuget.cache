@@ -1,6 +1,6 @@
 {
   "version": 2,
-  "dgSpecHash": "FkHLNshdws09uyURINKZWDWwVQUaA1wfpGhvZCYsdM/Ru0qT+td9FSq0VmhqNUz5PYQSEvhv4E1L9staYJQWrA==",
+  "dgSpecHash": "I9UfK9xm2jbEZqVFGJG0+JU1x4PR8hJdiHWAKTYxzYIltl8oy8nxYyBOFhbks710Ep64pBE+2+BYWEDkMy8/cw==",
   "success": true,
   "projectFilePath": "D:\\-EMTE-\\4.ev\\4_II\\.NET\\dotNet_project\\dotNet_project\\dotNet_project.csproj",
   "expectedPackageFiles": [
@@ -10,6 +10,8 @@
     "C:\\Users\\Aaron Bison\\.nuget\\packages\\k4os.compression.lz4\\1.1.11\\k4os.compression.lz4.1.1.11.nupkg.sha512",
     "C:\\Users\\Aaron Bison\\.nuget\\packages\\k4os.compression.lz4.streams\\1.1.11\\k4os.compression.lz4.streams.1.1.11.nupkg.sha512",
     "C:\\Users\\Aaron Bison\\.nuget\\packages\\k4os.hash.xxhash\\1.0.6\\k4os.hash.xxhash.1.0.6.nupkg.sha512",
+    "C:\\Users\\Aaron Bison\\.nuget\\packages\\microsoft.extensions.configuration.abstractions\\5.0.0\\microsoft.extensions.configuration.abstractions.5.0.0.nupkg.sha512",
+    "C:\\Users\\Aaron Bison\\.nuget\\packages\\microsoft.extensions.primitives\\5.0.0\\microsoft.extensions.primitives.5.0.0.nupkg.sha512",
     "C:\\Users\\Aaron Bison\\.nuget\\packages\\microsoft.netcore.platforms\\3.1.0\\microsoft.netcore.platforms.3.1.0.nupkg.sha512",
     "C:\\Users\\Aaron Bison\\.nuget\\packages\\microsoft.win32.systemevents\\4.7.0\\microsoft.win32.systemevents.4.7.0.nupkg.sha512",
     "C:\\Users\\Aaron Bison\\.nuget\\packages\\mysql.data\\8.0.24\\mysql.data.8.0.24.nupkg.sha512",

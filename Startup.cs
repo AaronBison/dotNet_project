@@ -30,8 +30,8 @@ namespace dotNet_project
             services.AddRazorPages();
             services.AddServerSideBlazor();
             services.AddSingleton<WeatherForecastService>();
-            services.AddSingleton<IClientService, ClientService>();
-            services.AddSingleton<IDataAcces, DataAcces>();
+            services.AddTransient<IDataAcces, DataAcces>();
+            services.AddTransient<IClientsData, ClientsData>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

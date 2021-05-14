@@ -1,82 +1,74 @@
 ﻿@page "/clients"
 
 @using DataLibrary
+@using DataLibrary.Models
 @using dotNet_project.Models
-@using Microsoft.Extensions.Configuration
 
-@inject IDataAcces _data
-@inject IConfiguration _config
+@inject IClientsData _db
 
 
 <h1>Clients</h1>
 
-<button style="margin: 5px" class="btn btn-primary" @onclick="InsertData">Add Client</button>
+<h4>Insert New Client</h4>
+<EditForm Model="@newClient" OnValidSubmit="@InsertClient">
+    <DataAnnotationsValidator/>
+    <ValidationSummary/>
 
-@if (clients == null)
-{
+    <InputText placeholder="First Name" id="firstName" @bind-Value="newClient.FirstName" Label="First Name"/>
+    <InputText placeholder="Last Name" id="lastName" @bind-Value="newClient.LastName" Label="Last Name"/>
+
+
+    <button type="submit" class="btn btn-primary">Submit</button>
+</EditForm>
+
+<h4>Current Clients</h4>
+@if(clients == null){
     <p><em>Loading...</em></p>
 }
 else
 {
-    <table class="table">
+    <table class="table table-striped">
         <thead>
             <tr>
-                <td><b>First Name</b></td>
-                <td><b>Last Name</b></td>
-                <td><b>Operations</b></td>
+                <th>First Name</th>
+                <th>Last Name</th>
             </tr>
         </thead>
         <tbody>
-            @foreach (var client in clients)
+            @foreach(var client in clients)
             {
-            <tr>
-                <td>@client.FirstName</td>
-                <td>@client.LastName</td>
-
-                <td>
-                <button style="margin: 5px;" class="btn btn-warning" @onclick="UpdateData">Update</button>
-                <button style="margin: 5px; align-content:end;" class="btn btn-danger" @onclick="DeleteData">Delete</button>
-                </td>
-            </tr>
+                <tr>
+                    <td>@client.FirstName</td>
+                    <td>@client.LastName</td>
+                </tr>
             }
         </tbody>
     </table>
 }
 
+
 @code {
 
     private List<ClientModel> clients;
-    private async Task InsertData()
-    {
-        string sql = "INSERT INTO clients (FirstName, LastName) VALUES (@FirstName, @LastName);";
-
-        await _data.SaveData(sql, new { FirstName = "Thomas", LastName = "Bison" }, _config.GetConnectionString("default"));
-
-        await OnInitializedAsync();
-    }
-
-    private async Task UpdateData()
-    {
-        string sql = "UPDATE clients set FirstName = @FirstName where LastName = @LastName";
-
-        await _data.SaveData(sql, new { FirstName = "Denko", LastName = "Corey" }, _config.GetConnectionString("default"));
-
-        await OnInitializedAsync();
-    }
-
-    private async Task DeleteData()
-    {
-        string sql = "DELETE FROM clients WHERE FirstName = @FirstName";
-
-        await _data.SaveData(sql, new { FirstName = "Thomas" }, _config.GetConnectionString("default"));
-
-        await OnInitializedAsync();
-    }
-
+    private DisplayClientModel newClient = new DisplayClientModel();
 
     protected override async Task OnInitializedAsync()
     {
-        string sql = "SELECT * FROM clients";
-        clients = await _data.LoadData<ClientModel, dynamic>(sql, new { }, _config.GetConnectionString("default"));
+        clients = await _db.GetClients();
+    }
+
+    private async Task InsertClient()
+    {
+        ClientModel c = new ClientModel
+        {
+            FirstName = newClient.FirstName,
+            LastName = newClient.LastName
+
+        };
+        await _db.InsertClient(c);
+
+        await OnInitializedAsync();
+
+        newClient = new DisplayClientModel();
     }
 }

@@ -63,3 +63,5 @@ D:\-EMTE-\4.ev\4_II\.NET\dotNet_project\dotNet_project\bin\Debug\netcoreapp3.1\S
 D:\-EMTE-\4.ev\4_II\.NET\dotNet_project\dotNet_project\bin\Debug\netcoreapp3.1\runtimes\win\lib\netstandard2.0\System.Security.Cryptography.ProtectedData.dll
 D:\-EMTE-\4.ev\4_II\.NET\dotNet_project\dotNet_project\bin\Debug\netcoreapp3.1\DataLibrary.dll
 D:\-EMTE-\4.ev\4_II\.NET\dotNet_project\dotNet_project\bin\Debug\netcoreapp3.1\DataLibrary.pdb
+D:\-EMTE-\4.ev\4_II\.NET\dotNet_project\dotNet_project\bin\Debug\netcoreapp3.1\Microsoft.Extensions.Configuration.Abstractions.dll
+D:\-EMTE-\4.ev\4_II\.NET\dotNet_project\dotNet_project\bin\Debug\netcoreapp3.1\Microsoft.Extensions.Primitives.dll
