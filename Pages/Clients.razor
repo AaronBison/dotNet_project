@@ -10,22 +10,50 @@
 <h1>Clients</h1>
 
 <h4>Insert New Client</h4>
-<EditForm Model="@newClient" OnValidSubmit="@InsertClient" style="width:200px; margin:15px;">
+<EditForm Model="@newClient" OnValidSubmit="@InsertClient" style="width:400px; margin:15px;">
     <DataAnnotationsValidator />
     <ValidationSummary />
 
-    <InputText class="form-control" style="margin: 5px;" placeholder="Name" id="name" @bind-Value="newClient.Name" Label="Name" />
-    <InputText class="form-control" style="margin: 5px;" placeholder="Phone Number" id="phonenumber" @bind-Value="newClient.PhoneNumber" Label="Phone Number" />
-    <InputText class="form-control" style="margin: 5px;" placeholder="Email Address" id="emailaddress" @bind-Value="newClient.EmailAddress" Label="EmailAddress" />
-    <InputText class="form-control" style="margin: 5px;" placeholder="CNP" id="cnp" @bind-Value="newClient.CNP" Label="CNP" />
-    <InputText class="form-control" style="margin: 5px;" placeholder="Address" id="address" @bind-Value="newClient.Address" Label="Address" />
-    <InputText class="form-control" style="margin: 5px;" placeholder="Notes" id="notes" @bind-Value="newClient.Notes" Label="Notes" />
+    <table>
+        <tbody>
+            <tr>
+                <td>
+                    <h6><b>Client Name</b></h6>
+                    <InputText class="form-control" style="margin: 10px;" placeholder="Name" id="name" @bind-Value="newClient.Name" Label="Name" />
+                </td>
+                <td>
+                    <h6><b>Phone number</b></h6>
+                    <InputText class="form-control" style="margin: 10px;" placeholder="Phone Number" id="phonenumber" @bind-Value="newClient.PhoneNumber" Label="Phone Number" />
+                </td>
+                </tr>
+            <tr>
+                <td>
+                    <h6><b>Email address</b></h6>
+                    <InputText class="form-control" style="margin: 10px;" placeholder="Email Address" id="emailaddress" @bind-Value="newClient.EmailAddress" Label="EmailAddress" />
+                </td>
+                <td>
+                    <h6><b>CNP</b></h6>
+                    <InputText class="form-control" style="margin: 10px;" placeholder="CNP" id="cnp" @bind-Value="newClient.CNP" Label="CNP" />
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <h6><b>Address</b></h6>
+                    <InputText class="form-control" style="margin: 10px;" placeholder="Address" id="address" @bind-Value="newClient.Address" Label="Address" />
+                </td>
+                <td>
+                    <h6><b>Notes</b></h6>
+                    <InputText class="form-control" style="margin: 10px;" placeholder="Notes" id="notes" @bind-Value="newClient.Notes" Label="Notes" />
+                </td>
+            </tr>
 
+        </tbody>
+    </table>
 
     <button type="submit" class="btn btn-success" style="margin: 10px;">Add</button>
 </EditForm>
 
-<hr/>
+<hr />
 
 <h4>Current Clients</h4>
 @if (clients == null)
@@ -50,16 +78,16 @@ else
         <tbody>
             @foreach (var client in clients)
             {
-            <tr>
-                <td>@client.Name</td>
-                <td>@client.PhoneNumber</td>
-                <td>@client.EmailAddress</td>
-                <td>@client.CNP</td>
-                <td>@client.Address</td>
-                <td>@client.Notes</td>
-                <td><button class="btn btn-primary" style="margin: 10px;">Modify</button></td>
-                <td><button class="btn btn-danger" @onclick="() => DeleteClient(client)" style="margin: 10px;">Delete</button></td>
-            </tr>
+                <tr>
+                    <td>@client.Name</td>
+                    <td>@client.PhoneNumber</td>
+                    <td>@client.EmailAddress</td>
+                    <td>@client.CNP</td>
+                    <td>@client.Address</td>
+                    <td>@client.Notes</td>
+                    <td><button class="btn btn-primary" style="margin: 10px;">Modify</button></td>
+                    <td><button class="btn btn-danger" @onclick="() => DeleteClient(client)" style="margin: 10px;">Delete</button></td>
+                </tr>
             }
         </tbody>
     </table>

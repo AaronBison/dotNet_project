@@ -9,7 +9,7 @@
 
 <h1>Passes</h1>
 
-<h4>Create New pass</h4>
+<h4>Create New Pass</h4>
 <EditForm Model="@newPass" OnValidSubmit="@InsertPass" style="width: 400px; margin:15px;">
     <DataAnnotationsValidator />
     <ValidationSummary />
@@ -65,7 +65,7 @@
 
 <hr />
 
-<h4>Current Clients</h4>
+<h4>Current Passes</h4>
 @if (passes == null)
 {
     <p><em>Loading...</em></p>
