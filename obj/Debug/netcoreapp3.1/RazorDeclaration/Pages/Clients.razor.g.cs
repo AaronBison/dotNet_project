@@ -105,7 +105,7 @@ using dotNet_project.Models;
         }
         #pragma warning restore 1998
 #nullable restore
-#line 50 "D:\-EMTE-\4.ev\4_II\.NET\dotNet_project\dotNet_project\Pages\Clients.razor"
+#line 69 "D:\-EMTE-\4.ev\4_II\.NET\dotNet_project\dotNet_project\Pages\Clients.razor"
        
 
     private List<ClientModel> clients;
@@ -118,17 +118,33 @@ using dotNet_project.Models;
 
     private async Task InsertClient()
     {
+        Random rd = new Random();
+        int bar_code = rd.Next(1000, 9999);
+
         ClientModel c = new ClientModel
         {
-            FirstName = newClient.FirstName,
-            LastName = newClient.LastName
-
+            Name = newClient.Name,
+            PhoneNumber = newClient.PhoneNumber,
+            EmailAddress = newClient.EmailAddress,
+            is_deleted = false,
+            CNP = newClient.CNP,
+            CreatedDate = DateTime.UtcNow.ToString("yyyy-MM-dd"),
+            Address = newClient.Address,
+            BarCode = bar_code.ToString(),
+            Notes = newClient.Notes,
         };
         await _db.InsertClient(c);
 
         await OnInitializedAsync();
 
         newClient = new DisplayClientModel();
+    }
+
+    private async Task DeleteClient(ClientModel client)
+    {
+        await _db.DeleteClient(client);
+
+        await OnInitializedAsync();
     }
 
 #line default

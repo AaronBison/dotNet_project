@@ -10,19 +10,26 @@
 <h1>Clients</h1>
 
 <h4>Insert New Client</h4>
-<EditForm Model="@newClient" OnValidSubmit="@InsertClient">
-    <DataAnnotationsValidator/>
-    <ValidationSummary/>
+<EditForm Model="@newClient" OnValidSubmit="@InsertClient" style="width:200px; margin:15px;">
+    <DataAnnotationsValidator />
+    <ValidationSummary />
 
-    <InputText placeholder="First Name" id="firstName" @bind-Value="newClient.FirstName" Label="First Name"/>
-    <InputText placeholder="Last Name" id="lastName" @bind-Value="newClient.LastName" Label="Last Name"/>
+    <InputText class="form-control" style="margin: 5px;" placeholder="Name" id="name" @bind-Value="newClient.Name" Label="Name" />
+    <InputText class="form-control" style="margin: 5px;" placeholder="Phone Number" id="phonenumber" @bind-Value="newClient.PhoneNumber" Label="Phone Number" />
+    <InputText class="form-control" style="margin: 5px;" placeholder="Email Address" id="emailaddress" @bind-Value="newClient.EmailAddress" Label="EmailAddress" />
+    <InputText class="form-control" style="margin: 5px;" placeholder="CNP" id="cnp" @bind-Value="newClient.CNP" Label="CNP" />
+    <InputText class="form-control" style="margin: 5px;" placeholder="Address" id="address" @bind-Value="newClient.Address" Label="Address" />
+    <InputText class="form-control" style="margin: 5px;" placeholder="Notes" id="notes" @bind-Value="newClient.Notes" Label="Notes" />
 
 
-    <button type="submit" class="btn btn-primary">Submit</button>
+    <button type="submit" class="btn btn-success" style="margin: 10px;">Add</button>
 </EditForm>
 
+<hr/>
+
 <h4>Current Clients</h4>
-@if(clients == null){
+@if (clients == null)
+{
     <p><em>Loading...</em></p>
 }
 else
@@ -30,17 +37,29 @@ else
     <table class="table table-striped">
         <thead>
             <tr>
-                <th>First Name</th>
-                <th>Last Name</th>
+                <th>Name</th>
+                <th>PhoneNumber</th>
+                <th>EmailAddress</th>
+                <th>CNP</th>
+                <th>Address</th>
+                <th>Notes</th>
+                <th>Modify</th>
+                <th>Delete</th>
             </tr>
         </thead>
         <tbody>
-            @foreach(var client in clients)
+            @foreach (var client in clients)
             {
-                <tr>
-                    <td>@client.FirstName</td>
-                    <td>@client.LastName</td>
-                </tr>
+            <tr>
+                <td>@client.Name</td>
+                <td>@client.PhoneNumber</td>
+                <td>@client.EmailAddress</td>
+                <td>@client.CNP</td>
+                <td>@client.Address</td>
+                <td>@client.Notes</td>
+                <td><button class="btn btn-primary" style="margin: 10px;">Modify</button></td>
+                <td><button class="btn btn-danger" @onclick="() => DeleteClient(client)" style="margin: 10px;">Delete</button></td>
+            </tr>
             }
         </tbody>
     </table>
@@ -59,16 +78,32 @@ else
 
     private async Task InsertClient()
     {
+        Random rd = new Random();
+        int bar_code = rd.Next(1000, 9999);
+
         ClientModel c = new ClientModel
         {
-            FirstName = newClient.FirstName,
-            LastName = newClient.LastName
-
+            Name = newClient.Name,
+            PhoneNumber = newClient.PhoneNumber,
+            EmailAddress = newClient.EmailAddress,
+            is_deleted = false,
+            CNP = newClient.CNP,
+            CreatedDate = DateTime.UtcNow.ToString("yyyy-MM-dd"),
+            Address = newClient.Address,
+            BarCode = bar_code.ToString(),
+            Notes = newClient.Notes,
         };
         await _db.InsertClient(c);
 
         await OnInitializedAsync();
 
         newClient = new DisplayClientModel();
+    }
+
+    private async Task DeleteClient(ClientModel client)
+    {
+        await _db.DeleteClient(client);
+
+        await OnInitializedAsync();
     }
 }

@@ -32,6 +32,7 @@ namespace dotNet_project
             services.AddSingleton<WeatherForecastService>();
             services.AddTransient<IDataAcces, DataAcces>();
             services.AddTransient<IClientsData, ClientsData>();
+            services.AddTransient<IPassesData, PassesData>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

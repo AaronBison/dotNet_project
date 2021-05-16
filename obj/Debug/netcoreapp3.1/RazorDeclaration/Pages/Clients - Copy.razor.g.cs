@@ -76,14 +76,28 @@ using dotNet_project.Shared;
 #line hidden
 #nullable disable
 #nullable restore
-#line 3 "D:\-EMTE-\4.ev\4_II\.NET\dotNet_project\dotNet_project\Pages\FetchData.razor"
-using dotNet_project.Data;
+#line 3 "D:\-EMTE-\4.ev\4_II\.NET\dotNet_project\dotNet_project\Pages\Clients - Copy.razor"
+using DataLibrary;
 
 #line default
 #line hidden
 #nullable disable
-    [Microsoft.AspNetCore.Components.RouteAttribute("/fetchdata")]
-    public partial class FetchData : Microsoft.AspNetCore.Components.ComponentBase
+#nullable restore
+#line 4 "D:\-EMTE-\4.ev\4_II\.NET\dotNet_project\dotNet_project\Pages\Clients - Copy.razor"
+using DataLibrary.Models;
+
+#line default
+#line hidden
+#nullable disable
+#nullable restore
+#line 5 "D:\-EMTE-\4.ev\4_II\.NET\dotNet_project\dotNet_project\Pages\Clients - Copy.razor"
+using dotNet_project.Models;
+
+#line default
+#line hidden
+#nullable disable
+    [Microsoft.AspNetCore.Components.RouteAttribute("/clients")]
+    public partial class Clients___Copy : Microsoft.AspNetCore.Components.ComponentBase
     {
         #pragma warning disable 1998
         protected override void BuildRenderTree(Microsoft.AspNetCore.Components.Rendering.RenderTreeBuilder __builder)
@@ -91,19 +105,45 @@ using dotNet_project.Data;
         }
         #pragma warning restore 1998
 #nullable restore
-#line 39 "D:\-EMTE-\4.ev\4_II\.NET\dotNet_project\dotNet_project\Pages\FetchData.razor"
+#line 63 "D:\-EMTE-\4.ev\4_II\.NET\dotNet_project\dotNet_project\Pages\Clients - Copy.razor"
        
-    private WeatherForecast[] forecasts;
+
+    private List<ClientModel> clients;
+    private DisplayClientModel newClient = new DisplayClientModel();
 
     protected override async Task OnInitializedAsync()
     {
-        forecasts = await ForecastService.GetForecastAsync(DateTime.Now);
+        clients = await _db.GetClients();
+    }
+
+    private async Task InsertClient()
+    {
+        Random rd = new Random();
+        int bar_code = rd.Next(1000, 9999);
+
+        ClientModel c = new ClientModel
+        {
+            Name = newClient.Name,
+            PhoneNumber = newClient.PhoneNumber,
+            EmailAddress = newClient.EmailAddress,
+            is_deleted = false,
+            CNP = newClient.CNP,
+            CreatedDate = DateTime.UtcNow.ToString("yyyy-MM-dd"),
+            Address = newClient.Address,
+            BarCode = bar_code.ToString(),
+            Notes = newClient.Notes,
+        };
+        await _db.InsertClient(c);
+
+        await OnInitializedAsync();
+
+        newClient = new DisplayClientModel();
     }
 
 #line default
 #line hidden
 #nullable disable
-        [global::Microsoft.AspNetCore.Components.InjectAttribute] private WeatherForecastService ForecastService { get; set; }
+        [global::Microsoft.AspNetCore.Components.InjectAttribute] private IClientsData _db { get; set; }
     }
 }
 #pragma warning restore 1591

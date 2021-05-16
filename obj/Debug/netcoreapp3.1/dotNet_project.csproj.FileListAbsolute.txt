@@ -15,7 +15,6 @@ D:\-EMTE-\4.ev\4_II\.NET\dotNet_project\dotNet_project\obj\Debug\netcoreapp3.1\d
 D:\-EMTE-\4.ev\4_II\.NET\dotNet_project\dotNet_project\obj\Debug\netcoreapp3.1\dotNet_project.MvcApplicationPartsAssemblyInfo.cache
 D:\-EMTE-\4.ev\4_II\.NET\dotNet_project\dotNet_project\obj\Debug\netcoreapp3.1\dotNet_project.RazorComponent.input.cache
 D:\-EMTE-\4.ev\4_II\.NET\dotNet_project\dotNet_project\obj\Debug\netcoreapp3.1\RazorDeclaration\App.razor.g.cs
-D:\-EMTE-\4.ev\4_II\.NET\dotNet_project\dotNet_project\obj\Debug\netcoreapp3.1\RazorDeclaration\Pages\FetchData.razor.g.cs
 D:\-EMTE-\4.ev\4_II\.NET\dotNet_project\dotNet_project\obj\Debug\netcoreapp3.1\RazorDeclaration\Pages\Index.razor.g.cs
 D:\-EMTE-\4.ev\4_II\.NET\dotNet_project\dotNet_project\obj\Debug\netcoreapp3.1\RazorDeclaration\Shared\MainLayout.razor.g.cs
 D:\-EMTE-\4.ev\4_II\.NET\dotNet_project\dotNet_project\obj\Debug\netcoreapp3.1\RazorDeclaration\Shared\NavMenu.razor.g.cs
@@ -27,7 +26,6 @@ D:\-EMTE-\4.ev\4_II\.NET\dotNet_project\dotNet_project\obj\Debug\netcoreapp3.1\d
 D:\-EMTE-\4.ev\4_II\.NET\dotNet_project\dotNet_project\obj\Debug\netcoreapp3.1\dotNet_project.TagHelpers.output.cache
 D:\-EMTE-\4.ev\4_II\.NET\dotNet_project\dotNet_project\obj\Debug\netcoreapp3.1\dotNet_project.RazorCoreGenerate.cache
 D:\-EMTE-\4.ev\4_II\.NET\dotNet_project\dotNet_project\obj\Debug\netcoreapp3.1\Razor\App.razor.g.cs
-D:\-EMTE-\4.ev\4_II\.NET\dotNet_project\dotNet_project\obj\Debug\netcoreapp3.1\Razor\Pages\FetchData.razor.g.cs
 D:\-EMTE-\4.ev\4_II\.NET\dotNet_project\dotNet_project\obj\Debug\netcoreapp3.1\Razor\Pages\Index.razor.g.cs
 D:\-EMTE-\4.ev\4_II\.NET\dotNet_project\dotNet_project\obj\Debug\netcoreapp3.1\Razor\Shared\MainLayout.razor.g.cs
 D:\-EMTE-\4.ev\4_II\.NET\dotNet_project\dotNet_project\obj\Debug\netcoreapp3.1\Razor\Shared\NavMenu.razor.g.cs
@@ -65,3 +63,5 @@ D:\-EMTE-\4.ev\4_II\.NET\dotNet_project\dotNet_project\bin\Debug\netcoreapp3.1\D
 D:\-EMTE-\4.ev\4_II\.NET\dotNet_project\dotNet_project\bin\Debug\netcoreapp3.1\DataLibrary.pdb
 D:\-EMTE-\4.ev\4_II\.NET\dotNet_project\dotNet_project\bin\Debug\netcoreapp3.1\Microsoft.Extensions.Configuration.Abstractions.dll
 D:\-EMTE-\4.ev\4_II\.NET\dotNet_project\dotNet_project\bin\Debug\netcoreapp3.1\Microsoft.Extensions.Primitives.dll
+D:\-EMTE-\4.ev\4_II\.NET\dotNet_project\dotNet_project\obj\Debug\netcoreapp3.1\RazorDeclaration\Pages\Passes.razor.g.cs
+D:\-EMTE-\4.ev\4_II\.NET\dotNet_project\dotNet_project\obj\Debug\netcoreapp3.1\Razor\Pages\Passes.razor.g.cs
