@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "I9UfK9xm2jbEZqVFGJG0+JU1x4PR8hJdiHWAKTYxzYIltl8oy8nxYyBOFhbks710Ep64pBE+2+BYWEDkMy8/cw==",
+  "dgSpecHash": "ozs7WJSv6zI6zeLHBXEGN23e4lpmrFnNzVuhLDxYLMPvDEiCpF0TmlpN+fCnp0bZu4OL4u5sE2Hz5upnVG3tgQ==",
   "success": true,
-  "projectFilePath": "D:\\-EMTE-\\4.ev\\4_II\\.NET\\dotNet_project\\dotNet_project\\dotNet_project.csproj",
+  "projectFilePath": "D:\\-EMTE-\\4.ev\\4_II\\.NET\\dotNet_project\\dotNet_project\\dotNet_project\\dotNet_project.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\Aaron Bison\\.nuget\\packages\\bouncycastle.netcore\\1.8.5\\bouncycastle.netcore.1.8.5.nupkg.sha512",
     "C:\\Users\\Aaron Bison\\.nuget\\packages\\dapper\\2.0.90\\dapper.2.0.90.nupkg.sha512",

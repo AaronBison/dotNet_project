@@ -1024,11 +1024,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "D:\\-EMTE-\\4.ev\\4_II\\.NET\\dotNet_project\\dotNet_project\\dotNet_project.csproj",
+      "projectUniqueName": "D:\\-EMTE-\\4.ev\\4_II\\.NET\\dotNet_project\\dotNet_project\\dotNet_project\\dotNet_project.csproj",
       "projectName": "dotNet_project",
-      "projectPath": "D:\\-EMTE-\\4.ev\\4_II\\.NET\\dotNet_project\\dotNet_project\\dotNet_project.csproj",
+      "projectPath": "D:\\-EMTE-\\4.ev\\4_II\\.NET\\dotNet_project\\dotNet_project\\dotNet_project\\dotNet_project.csproj",
       "packagesPath": "C:\\Users\\Aaron Bison\\.nuget\\packages\\",
-      "outputPath": "D:\\-EMTE-\\4.ev\\4_II\\.NET\\dotNet_project\\dotNet_project\\obj\\",
+      "outputPath": "D:\\-EMTE-\\4.ev\\4_II\\.NET\\dotNet_project\\dotNet_project\\dotNet_project\\obj\\",
       "projectStyle": "PackageReference",
       "configFilePaths": [
         "C:\\Users\\Aaron Bison\\AppData\\Roaming\\NuGet\\NuGet.Config",
@@ -1045,8 +1045,8 @@
         "netcoreapp3.1": {
           "targetAlias": "netcoreapp3.1",
           "projectReferences": {
-            "D:\\-EMTE-\\4.ev\\4_II\\.NET\\dotNet_project\\DataLibrary\\DataLibrary.csproj": {
-              "projectPath": "D:\\-EMTE-\\4.ev\\4_II\\.NET\\dotNet_project\\DataLibrary\\DataLibrary.csproj"
+            "D:\\-EMTE-\\4.ev\\4_II\\.NET\\dotNet_project\\dotNet_project\\DataLibrary\\DataLibrary.csproj": {
+              "projectPath": "D:\\-EMTE-\\4.ev\\4_II\\.NET\\dotNet_project\\dotNet_project\\DataLibrary\\DataLibrary.csproj"
             }
           }
         }
