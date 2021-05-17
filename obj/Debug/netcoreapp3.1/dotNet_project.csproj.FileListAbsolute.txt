@@ -65,3 +65,5 @@ D:\-EMTE-\4.ev\4_II\.NET\dotNet_project\dotNet_project\bin\Debug\netcoreapp3.1\M
 D:\-EMTE-\4.ev\4_II\.NET\dotNet_project\dotNet_project\bin\Debug\netcoreapp3.1\Microsoft.Extensions.Primitives.dll
 D:\-EMTE-\4.ev\4_II\.NET\dotNet_project\dotNet_project\obj\Debug\netcoreapp3.1\RazorDeclaration\Pages\Passes.razor.g.cs
 D:\-EMTE-\4.ev\4_II\.NET\dotNet_project\dotNet_project\obj\Debug\netcoreapp3.1\Razor\Pages\Passes.razor.g.cs
+D:\-EMTE-\4.ev\4_II\.NET\dotNet_project\dotNet_project\obj\Debug\netcoreapp3.1\RazorDeclaration\Pages\Client.razor.g.cs
+D:\-EMTE-\4.ev\4_II\.NET\dotNet_project\dotNet_project\obj\Debug\netcoreapp3.1\Razor\Pages\Client.razor.g.cs

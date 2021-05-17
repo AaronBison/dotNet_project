@@ -3,8 +3,10 @@
 @using DataLibrary
 @using DataLibrary.Models
 @using dotNet_project.Models
+@using Microsoft.AspNetCore.Components
 
 @inject IClientsData _db
+@inject NavigationManager NavigationManager
 
 
 <h1>Clients</h1>
@@ -85,7 +87,7 @@ else
                     <td>@client.CNP</td>
                     <td>@client.Address</td>
                     <td>@client.Notes</td>
-                    <td><button class="btn btn-primary" style="margin: 10px;">Modify</button></td>
+                    <td><button class="btn btn-primary" @onclick="() => MoveToModifyPage(client)" style="margin: 10px;">Modify</button></td>
                     <td><button class="btn btn-danger" @onclick="() => DeleteClient(client)" style="margin: 10px;">Delete</button></td>
                 </tr>
             }
@@ -133,5 +135,10 @@ else
         await _db.DeleteClient(client);
 
         await OnInitializedAsync();
+    }
+
+    void MoveToModifyPage(ClientModel client)
+    {
+        NavigationManager.NavigateTo("/clients/" + client.ClientId);
     }
 }
