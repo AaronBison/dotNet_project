@@ -105,7 +105,7 @@ using dotNet_project.Models;
         }
         #pragma warning restore 1998
 #nullable restore
-#line 111 "D:\-EMTE-\4.ev\4_II\.NET\dotNet_project\dotNet_project\Pages\Passes.razor"
+#line 113 "D:\-EMTE-\4.ev\4_II\.NET\dotNet_project\dotNet_project\Pages\Passes.razor"
        
 
     private List<PassModel> passes;

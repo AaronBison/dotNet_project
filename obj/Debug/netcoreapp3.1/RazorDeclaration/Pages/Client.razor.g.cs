@@ -75,7 +75,21 @@ using dotNet_project.Shared;
 #line default
 #line hidden
 #nullable disable
-    [Microsoft.AspNetCore.Components.RouteAttribute("/client/{name}")]
+#nullable restore
+#line 3 "D:\-EMTE-\4.ev\4_II\.NET\dotNet_project\dotNet_project\Pages\Client.razor"
+using DataLibrary;
+
+#line default
+#line hidden
+#nullable disable
+#nullable restore
+#line 4 "D:\-EMTE-\4.ev\4_II\.NET\dotNet_project\dotNet_project\Pages\Client.razor"
+using DataLibrary.Models;
+
+#line default
+#line hidden
+#nullable disable
+    [Microsoft.AspNetCore.Components.RouteAttribute("/clients/{id}")]
     public partial class Client : Microsoft.AspNetCore.Components.ComponentBase
     {
         #pragma warning disable 1998
@@ -83,6 +97,30 @@ using dotNet_project.Shared;
         {
         }
         #pragma warning restore 1998
+#nullable restore
+#line 31 "D:\-EMTE-\4.ev\4_II\.NET\dotNet_project\dotNet_project\Pages\Client.razor"
+       
+    [Parameter]
+    public string Id { get; set; }
+
+    private ClientModel client;
+
+    protected override void OnInitialized()
+    {
+        client = _db.GetClient(Id);
+    }
+
+    private void UpdateClient()
+    {
+        _db.UpdateClient(client);
+        NavigationManager.NavigateTo("/clients");
+    }
+
+#line default
+#line hidden
+#nullable disable
+        [global::Microsoft.AspNetCore.Components.InjectAttribute] private IClientsData _db { get; set; }
+        [global::Microsoft.AspNetCore.Components.InjectAttribute] private NavigationManager NavigationManager { get; set; }
     }
 }
 #pragma warning restore 1591
