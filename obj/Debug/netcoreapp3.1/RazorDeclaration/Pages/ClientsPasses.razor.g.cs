@@ -98,23 +98,29 @@ using DataLibrary.Models;
         }
         #pragma warning restore 1998
 #nullable restore
-#line 12 "D:\-EMTE-\4.ev\4_II\.NET\dotNet_project\dotNet_project\Pages\ClientsPasses.razor"
+#line 47 "D:\-EMTE-\4.ev\4_II\.NET\dotNet_project\dotNet_project\Pages\ClientsPasses.razor"
        
     [Parameter]
     public string Id { get; set; }
-
     private ClientModel client;
+    private List<ClientsPassesModel> clientsPasses;
 
     protected override void OnInitialized()
     {
-        client = _db.GetClient(Id);
+        client = _dbC.GetClient(Id);
+    }
+
+    protected override async Task OnInitializedAsync()
+    {
+        clientsPasses = await _dbCP.GetClientsPass(client);
     }
 
 
 #line default
 #line hidden
 #nullable disable
-        [global::Microsoft.AspNetCore.Components.InjectAttribute] private IClientsData _db { get; set; }
+        [global::Microsoft.AspNetCore.Components.InjectAttribute] private IClientsPassesData _dbCP { get; set; }
+        [global::Microsoft.AspNetCore.Components.InjectAttribute] private IClientsData _dbC { get; set; }
     }
 }
 #pragma warning restore 1591

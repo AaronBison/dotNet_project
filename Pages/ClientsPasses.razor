@@ -3,21 +3,61 @@
 @using DataLibrary
 @using DataLibrary.Models
 
-@inject IClientsData _db
+@inject IClientsData _dbC
+@inject IClientsPassesData _dbCP
 
 <hr />
 <h3>@client.Name's Passes</h3>
-<hr />
+
+@if (clientsPasses == null)
+{
+    <p><em>Loading...</em></p>
+}
+else
+{
+    <table class="table table-striped">
+        <thead>
+            <tr>
+                <th>Pass Id</th>
+                <th>Buy date</th>
+                <th>Bar code</th>
+                <th>Entries count</th>
+                <th>Buy price</th>
+                <th>First usage date</th>
+                <th>Hall Id</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var clientPass in clientsPasses)
+            {
+            <tr>
+                <td>@clientPass.PassId</td>
+                <td>@clientPass.BuyDate</td>
+                <td>@clientPass.BarCode</td>
+                <td>@clientPass.EntriesCount</td>
+                <td>@clientPass.BuyPrice</td>
+                <td>@clientPass.FirstUsageDate</td>
+                <td>@clientPass.HallId</td>
+            </tr>
+            }
+        </tbody>
+    </table>
+}
 
 @code {
     [Parameter]
     public string Id { get; set; }
-
     private ClientModel client;
+    private List<ClientsPassesModel> clientsPasses;
 
     protected override void OnInitialized()
     {
-        client = _db.GetClient(Id);
+        client = _dbC.GetClient(Id);
+    }
+
+    protected override async Task OnInitializedAsync()
+    {
+        clientsPasses = await _dbCP.GetClientsPass(client);
     }
 
 }
