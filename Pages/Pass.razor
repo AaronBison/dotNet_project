@@ -1,0 +1,42 @@
+﻿@page "/passes/{id}"
+
+@using DataLibrary
+@using DataLibrary.Models
+
+@inject NavigationManager NavigationManager
+@inject IPassesData _db
+
+<h3>Edit Pass</h3>
+
+<EditForm Model="pass" OnSubmit="@UpdatePass" style="width:400px;">
+
+    <div class="form-group">
+        <label>Id</label>
+        <input id="id" class="form-control" value="@pass." readonly />
+    </div>
+
+    <div class="form-group">
+        <label>Id</label>
+        <InputText id="name" class="form-control" name="name" @bind-Value="client.Name" />
+    </div>
+
+    <button type="submit" class="btn btn-primary">Update</button>
+</EditForm>
+
+@code {
+    [Parameter]
+    public string Id { get; set; }
+
+    private ClientModel client;
+
+    protected override void OnInitialized()
+    {
+        client = _db.GetClient(Id);
+    }
+
+    private void UpdateClient()
+    {
+        _db.UpdateClient(client);
+        NavigationManager.NavigateTo("/clients");
+    }
+}
