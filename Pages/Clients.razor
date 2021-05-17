@@ -75,6 +75,7 @@ else
                 <th>CNP</th>
                 <th>Address</th>
                 <th>Notes</th>
+                <th>See Passes</th>
                 <th>Modify</th>
                 <th>Delete</th>
             </tr>
@@ -89,8 +90,9 @@ else
                     <td>@client.CNP</td>
                     <td>@client.Address</td>
                     <td>@client.Notes</td>
-                    <td><button class="btn btn-primary" @onclick="() => MoveToModifyPage(client)" style="margin: 10px;">Modify</button></td>
-                    <td><button class="btn btn-danger" @onclick="() => DeleteClient(client)" style="margin: 10px;">Delete</button></td>
+                    <td><button class="btn btn-outline-primary" @onclick="() => MoveToClientsPassesPage(client)" style="margin: 10px;">See Passes</button></td>
+                    <td><button class="btn btn-outline-warning" @onclick="() => MoveToModifyPage(client)" style="margin: 10px;">Modify</button></td>
+                    <td><button class="btn btn-outline-danger" @onclick="() => DeleteClient(client)" style="margin: 10px;">Delete</button></td>
                 </tr>
             }
         </tbody>
@@ -142,5 +144,10 @@ else
     void MoveToModifyPage(ClientModel client)
     {
         NavigationManager.NavigateTo("/clients/" + client.ClientId);
+    }
+
+    void MoveToClientsPassesPage(ClientModel client)
+    {
+        NavigationManager.NavigateTo("/clients/passes/" + client.ClientId);
     }
 }

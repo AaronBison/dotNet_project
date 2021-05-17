@@ -7,13 +7,13 @@
 @inject IClientsData _db
 
 <hr />
-<h3>Edit Client</h3>
+<h3>Edit @client.Name</h3>
 <hr />
 
 <EditForm Model="client" OnSubmit="@UpdateClient" style="width:400px;">
 
     <div class="form-group">
-        <label>Id</label>
+        <h6><b>Client ID</b></h6>
         <input id="id" class="form-control" value="@client.ClientId" readonly />
     </div>
 

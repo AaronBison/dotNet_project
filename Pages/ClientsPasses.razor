@@ -1,0 +1,23 @@
+﻿@page "/clients/passes/{id}"
+
+@using DataLibrary
+@using DataLibrary.Models
+
+@inject IClientsData _db
+
+<hr />
+<h3>@client.Name's Passes</h3>
+<hr />
+
+@code {
+    [Parameter]
+    public string Id { get; set; }
+
+    private ClientModel client;
+
+    protected override void OnInitialized()
+    {
+        client = _db.GetClient(Id);
+    }
+
+}

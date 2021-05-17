@@ -11,6 +11,7 @@ namespace dotNet_project.Pages
     using System.Collections.Generic;
     using System.Linq;
     using System.Threading.Tasks;
+    using Microsoft.AspNetCore.Components;
 #nullable restore
 #line 1 "D:\-EMTE-\4.ev\4_II\.NET\dotNet_project\dotNet_project\_Imports.razor"
 using System.Net.Http;
@@ -75,35 +76,21 @@ using dotNet_project.Shared;
 #line hidden
 #nullable disable
 #nullable restore
-#line 3 "D:\-EMTE-\4.ev\4_II\.NET\dotNet_project\dotNet_project\Pages\Clients.razor"
+#line 3 "D:\-EMTE-\4.ev\4_II\.NET\dotNet_project\dotNet_project\Pages\ClientsPasses.razor"
 using DataLibrary;
 
 #line default
 #line hidden
 #nullable disable
 #nullable restore
-#line 4 "D:\-EMTE-\4.ev\4_II\.NET\dotNet_project\dotNet_project\Pages\Clients.razor"
+#line 4 "D:\-EMTE-\4.ev\4_II\.NET\dotNet_project\dotNet_project\Pages\ClientsPasses.razor"
 using DataLibrary.Models;
 
 #line default
 #line hidden
 #nullable disable
-#nullable restore
-#line 5 "D:\-EMTE-\4.ev\4_II\.NET\dotNet_project\dotNet_project\Pages\Clients.razor"
-using dotNet_project.Models;
-
-#line default
-#line hidden
-#nullable disable
-#nullable restore
-#line 6 "D:\-EMTE-\4.ev\4_II\.NET\dotNet_project\dotNet_project\Pages\Clients.razor"
-using Microsoft.AspNetCore.Components;
-
-#line default
-#line hidden
-#nullable disable
-    [Microsoft.AspNetCore.Components.RouteAttribute("/clients")]
-    public partial class Clients : Microsoft.AspNetCore.Components.ComponentBase
+    [Microsoft.AspNetCore.Components.RouteAttribute("/clients/passes/{id}")]
+    public partial class ClientsPasses : Microsoft.AspNetCore.Components.ComponentBase
     {
         #pragma warning disable 1998
         protected override void BuildRenderTree(Microsoft.AspNetCore.Components.Rendering.RenderTreeBuilder __builder)
@@ -111,62 +98,22 @@ using Microsoft.AspNetCore.Components;
         }
         #pragma warning restore 1998
 #nullable restore
-#line 103 "D:\-EMTE-\4.ev\4_II\.NET\dotNet_project\dotNet_project\Pages\Clients.razor"
+#line 12 "D:\-EMTE-\4.ev\4_II\.NET\dotNet_project\dotNet_project\Pages\ClientsPasses.razor"
        
+    [Parameter]
+    public string Id { get; set; }
 
-    private List<ClientModel> clients;
-    private DisplayClientModel newClient = new DisplayClientModel();
+    private ClientModel client;
 
-    protected override async Task OnInitializedAsync()
+    protected override void OnInitialized()
     {
-        clients = await _db.GetClients();
+        client = _db.GetClient(Id);
     }
 
-    private async Task InsertClient()
-    {
-        Random rd = new Random();
-        int bar_code = rd.Next(1000, 9999);
-
-        ClientModel c = new ClientModel
-        {
-            Name = newClient.Name,
-            PhoneNumber = newClient.PhoneNumber,
-            EmailAddress = newClient.EmailAddress,
-            is_deleted = false,
-            CNP = newClient.CNP,
-            CreatedDate = DateTime.UtcNow.ToString("yyyy-MM-dd"),
-            Address = newClient.Address,
-            BarCode = bar_code.ToString(),
-            Notes = newClient.Notes,
-        };
-        await _db.InsertClient(c);
-
-        await OnInitializedAsync();
-
-        newClient = new DisplayClientModel();
-    }
-
-    private async Task DeleteClient(ClientModel client)
-    {
-        await _db.DeleteClient(client);
-
-        await OnInitializedAsync();
-    }
-
-    void MoveToModifyPage(ClientModel client)
-    {
-        NavigationManager.NavigateTo("/clients/" + client.ClientId);
-    }
-
-    void MoveToClientsPassesPage(ClientModel client)
-    {
-        NavigationManager.NavigateTo("/clients/passes/" + client.ClientId);
-    }
 
 #line default
 #line hidden
 #nullable disable
-        [global::Microsoft.AspNetCore.Components.InjectAttribute] private NavigationManager NavigationManager { get; set; }
         [global::Microsoft.AspNetCore.Components.InjectAttribute] private IClientsData _db { get; set; }
     }
 }
