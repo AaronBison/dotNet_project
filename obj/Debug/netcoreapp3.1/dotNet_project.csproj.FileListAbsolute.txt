@@ -67,3 +67,5 @@ D:\-EMTE-\4.ev\4_II\.NET\dotNet_project\dotNet_project\obj\Debug\netcoreapp3.1\R
 D:\-EMTE-\4.ev\4_II\.NET\dotNet_project\dotNet_project\obj\Debug\netcoreapp3.1\Razor\Pages\Passes.razor.g.cs
 D:\-EMTE-\4.ev\4_II\.NET\dotNet_project\dotNet_project\obj\Debug\netcoreapp3.1\RazorDeclaration\Pages\Client.razor.g.cs
 D:\-EMTE-\4.ev\4_II\.NET\dotNet_project\dotNet_project\obj\Debug\netcoreapp3.1\Razor\Pages\Client.razor.g.cs
+D:\-EMTE-\4.ev\4_II\.NET\dotNet_project\dotNet_project\obj\Debug\netcoreapp3.1\RazorDeclaration\Pages\Pass.razor.g.cs
+D:\-EMTE-\4.ev\4_II\.NET\dotNet_project\dotNet_project\obj\Debug\netcoreapp3.1\Razor\Pages\Pass.razor.g.cs

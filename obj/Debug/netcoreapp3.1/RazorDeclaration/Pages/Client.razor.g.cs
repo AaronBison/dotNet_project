@@ -98,7 +98,7 @@ using DataLibrary.Models;
         }
         #pragma warning restore 1998
 #nullable restore
-#line 31 "D:\-EMTE-\4.ev\4_II\.NET\dotNet_project\dotNet_project\Pages\Client.razor"
+#line 59 "D:\-EMTE-\4.ev\4_II\.NET\dotNet_project\dotNet_project\Pages\Client.razor"
        
     [Parameter]
     public string Id { get; set; }

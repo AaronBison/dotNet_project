@@ -105,7 +105,7 @@ using dotNet_project.Models;
         }
         #pragma warning restore 1998
 #nullable restore
-#line 113 "D:\-EMTE-\4.ev\4_II\.NET\dotNet_project\dotNet_project\Pages\Passes.razor"
+#line 114 "D:\-EMTE-\4.ev\4_II\.NET\dotNet_project\dotNet_project\Pages\Passes.razor"
        
 
     private List<PassModel> passes;
@@ -144,9 +144,15 @@ using dotNet_project.Models;
         await OnInitializedAsync();
     }
 
+    void MoveToModifyPage(PassModel pass)
+    {
+        NavigationManager.NavigateTo("/passes/" + pass.PassId);
+    }
+
 #line default
 #line hidden
 #nullable disable
+        [global::Microsoft.AspNetCore.Components.InjectAttribute] private NavigationManager NavigationManager { get; set; }
         [global::Microsoft.AspNetCore.Components.InjectAttribute] private IPassesData _db { get; set; }
     }
 }

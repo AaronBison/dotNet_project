@@ -6,7 +6,9 @@
 @inject NavigationManager NavigationManager
 @inject IClientsData _db
 
+<hr />
 <h3>Edit Client</h3>
+<hr />
 
 <EditForm Model="client" OnSubmit="@UpdateClient" style="width:400px;">
 
@@ -15,15 +17,41 @@
         <input id="id" class="form-control" value="@client.ClientId" readonly />
     </div>
 
-    <div class="form-group">
-        <label>Id</label>
-        <InputText id="name" class="form-control" name="name" @bind-Value="client.Name"/>
-        <InputText id="phonenumber" class="form-control" name="phonenumber" @bind-Value="client.PhoneNumber"/>
-        <InputText id="emailaddress" class="form-control" name="emailaddress" @bind-Value="client.EmailAddress"/>
-        <InputText id="cnp" class="form-control" name="cnp" @bind-Value="client.CNP"/>
-        <InputText id="address" class="form-control" name="address" @bind-Value="client.Address"/>
-        <InputText id="notes" class="form-control" name="notes" @bind-Value="client.Notes"/>
-    </div>
+    <table>
+        <tbody>
+            <tr>
+                <td>
+                    <h6><b>Client Name</b></h6>
+                    <InputText class="form-control" style="margin: 10px;" placeholder="Name" id="name" @bind-Value="client.Name" Label="Name" />
+                </td>
+                <td>
+                    <h6><b>Phone number</b></h6>
+                    <InputText class="form-control" style="margin: 10px;" placeholder="Phone Number" id="phonenumber" @bind-Value="client.PhoneNumber" Label="Phone Number" />
+                </td>
+                </tr>
+            <tr>
+                <td>
+                    <h6><b>Email address</b></h6>
+                    <InputText class="form-control" style="margin: 10px;" placeholder="Email Address" id="emailaddress" @bind-Value="client.EmailAddress" Label="EmailAddress" />
+                </td>
+                <td>
+                    <h6><b>CNP</b></h6>
+                    <InputText class="form-control" style="margin: 10px;" placeholder="CNP" id="cnp" @bind-Value="client.CNP" Label="CNP" />
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <h6><b>Address</b></h6>
+                    <InputText class="form-control" style="margin: 10px;" placeholder="Address" id="address" @bind-Value="client.Address" Label="Address" />
+                </td>
+                <td>
+                    <h6><b>Notes</b></h6>
+                    <InputText class="form-control" style="margin: 10px;" placeholder="Notes" id="notes" @bind-Value="client.Notes" Label="Notes" />
+                </td>
+            </tr>
+
+        </tbody>
+    </table>
 
     <button type="submit" class="btn btn-primary">Update</button>
 </EditForm>

@@ -6,19 +6,61 @@
 @inject NavigationManager NavigationManager
 @inject IPassesData _db
 
+<hr />
 <h3>Edit Pass</h3>
+<hr />
 
 <EditForm Model="pass" OnSubmit="@UpdatePass" style="width:400px;">
 
     <div class="form-group">
         <label>Id</label>
-        <input id="id" class="form-control" value="@pass." readonly />
+        <input id="id" class="form-control" value="@pass.PassId" readonly />
     </div>
 
-    <div class="form-group">
-        <label>Id</label>
-        <InputText id="name" class="form-control" name="name" @bind-Value="client.Name" />
-    </div>
+    <table>
+        <tbody>
+            <tr>
+                <td>
+                    <h6><b>Pass Name</b></h6>
+                    <InputText class="form-control" style="margin: 10px;" placeholder="Name" id="passname" @bind-Value="pass.PassName" Label="PassName" />
+                </td>
+                <td>
+                    <h6><b>Price</b></h6>
+                    <InputNumber class="form-control" style="margin: 10px;" placeholder="Price" id="price" @bind-Value="pass.Price" Label="Price" />
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <h6><b>Days until expires</b></h6>
+                    <InputNumber class="form-control" style="margin: 10px;" placeholder="Days until expires" id="daysuntilexpires" @bind-Value="pass.DaysUntilExpires" Label="DaysUntilExpires" />
+                </td>
+                <td>
+                    <h6><b>Entries until expires</b></h6>
+                    <InputNumber class="form-control" style="margin: 10px;" placeholder="Entries until expires" id="entriesuntilexpires" @bind-Value="pass.EntriesUntilExpires" Label="EntriesUntilExpires" />
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <h6><b>From hour</b></h6>
+                    <InputText class="form-control" style="margin: 10px;" placeholder="From hour" id="hourfrom" @bind-Value="pass.HourFrom" Label="HourFrom" />
+                </td>
+                <td>
+                    <h6><b>Until hour</b></h6>
+                    <InputText class="form-control" style="margin: 10px;" placeholder="Until hour" id="houruntil" @bind-Value="pass.HourUntil" Label="HourUntil" />
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <h6><b>Usable per day</b></h6>
+                    <InputNumber class="form-control" style="margin: 10px;" placeholder="Usable per day" id="usableperday" @bind-Value="pass.UsablePerDay" Label="UsablePerDay" />
+                </td>
+                <td>
+                    <h6><b>Hall Id</b></h6>
+                    <InputNumber class="form-control" style="margin: 10px;" placeholder="Hall Id" id="hallid" @bind-Value="pass.HallId" Label="HallId" />
+                </td>
+            </tr>
+        </tbody>
+    </table>
 
     <button type="submit" class="btn btn-primary">Update</button>
 </EditForm>
@@ -27,16 +69,16 @@
     [Parameter]
     public string Id { get; set; }
 
-    private ClientModel client;
+    private PassModel pass;
 
     protected override void OnInitialized()
     {
-        client = _db.GetClient(Id);
+        pass = _db.GetPass(Id);
     }
 
-    private void UpdateClient()
+    private void UpdatePass()
     {
-        _db.UpdateClient(client);
-        NavigationManager.NavigateTo("/clients");
+        _db.UpdatePass(pass);
+        NavigationManager.NavigateTo("/passes");
     }
 }

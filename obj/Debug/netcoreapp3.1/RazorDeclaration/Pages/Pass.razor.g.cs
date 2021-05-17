@@ -75,6 +75,21 @@ using dotNet_project.Shared;
 #line default
 #line hidden
 #nullable disable
+#nullable restore
+#line 3 "D:\-EMTE-\4.ev\4_II\.NET\dotNet_project\dotNet_project\Pages\Pass.razor"
+using DataLibrary;
+
+#line default
+#line hidden
+#nullable disable
+#nullable restore
+#line 4 "D:\-EMTE-\4.ev\4_II\.NET\dotNet_project\dotNet_project\Pages\Pass.razor"
+using DataLibrary.Models;
+
+#line default
+#line hidden
+#nullable disable
+    [Microsoft.AspNetCore.Components.RouteAttribute("/passes/{id}")]
     public partial class Pass : Microsoft.AspNetCore.Components.ComponentBase
     {
         #pragma warning disable 1998
@@ -82,6 +97,30 @@ using dotNet_project.Shared;
         {
         }
         #pragma warning restore 1998
+#nullable restore
+#line 68 "D:\-EMTE-\4.ev\4_II\.NET\dotNet_project\dotNet_project\Pages\Pass.razor"
+       
+    [Parameter]
+    public string Id { get; set; }
+
+    private PassModel pass;
+
+    protected override void OnInitialized()
+    {
+        pass = _db.GetPass(Id);
+    }
+
+    private void UpdatePass()
+    {
+        _db.UpdatePass(pass);
+        NavigationManager.NavigateTo("/passes");
+    }
+
+#line default
+#line hidden
+#nullable disable
+        [global::Microsoft.AspNetCore.Components.InjectAttribute] private IPassesData _db { get; set; }
+        [global::Microsoft.AspNetCore.Components.InjectAttribute] private NavigationManager NavigationManager { get; set; }
     }
 }
 #pragma warning restore 1591
