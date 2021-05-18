@@ -144,3 +144,5 @@ D:\-EMTE-\4.ev\4_II\.NET\dotNet_project\dotNet_project\dotNet_project\obj\Debug\
 D:\-EMTE-\4.ev\4_II\.NET\dotNet_project\dotNet_project\dotNet_project\obj\Debug\netcoreapp3.1\dotNet_project.dll
 D:\-EMTE-\4.ev\4_II\.NET\dotNet_project\dotNet_project\dotNet_project\obj\Debug\netcoreapp3.1\dotNet_project.pdb
 D:\-EMTE-\4.ev\4_II\.NET\dotNet_project\dotNet_project\dotNet_project\obj\Debug\netcoreapp3.1\dotNet_project.genruntimeconfig.cache
+D:\-EMTE-\4.ev\4_II\.NET\dotNet_project\dotNet_project\dotNet_project\obj\Debug\netcoreapp3.1\RazorDeclaration\Pages\Entries.razor.g.cs
+D:\-EMTE-\4.ev\4_II\.NET\dotNet_project\dotNet_project\dotNet_project\obj\Debug\netcoreapp3.1\Razor\Pages\Entries.razor.g.cs

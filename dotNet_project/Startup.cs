@@ -34,6 +34,7 @@ namespace dotNet_project
             services.AddTransient<IClientsData, ClientsData>();
             services.AddTransient<IPassesData, PassesData>();
             services.AddTransient<IClientsPassesData, ClientsPassesData>();
+            services.AddTransient<IEntriesData, EntriesData>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
