@@ -105,23 +105,25 @@ using dotNet_project.Models;
         }
         #pragma warning restore 1998
 #nullable restore
-#line 82 "D:\-EMTE-\4.ev\4_II\.NET\dotNet_project\dotNet_project\dotNet_project\Pages\Index.razor"
+#line 91 "D:\-EMTE-\4.ev\4_II\.NET\dotNet_project\dotNet_project\dotNet_project\Pages\Index.razor"
       
     private ClientBarCodeModel searchBarCode = new ClientBarCodeModel();
     private InfoClientModel client = new InfoClientModel();
+    private InfoClientsPassModel clientData;
 
-    string hasActivePassColor;
+    private string hasActivePassColor;
 
-    bool clientExists = true;
+    private bool clientExists = true;
+    private bool clientHasValidPass = true;
 
     private void SearchClient()
     {
         clientExists = true;
-        client = _db.GetClientInfoByBarCode(searchBarCode.BarCode);
+        client = _dbC.GetClientInfoByBarCode(searchBarCode.BarCode);
 
-        if(client.ClientId == 0)
+        if (client.ClientId == 0)
         {
-            ClientModel clientNoPass = _db.GetClientByBarCode(searchBarCode.BarCode);
+            ClientModel clientNoPass = _dbC.GetClientByBarCode(searchBarCode.BarCode);
 
             if (clientNoPass == null)
             {
@@ -151,6 +153,11 @@ using dotNet_project.Models;
 
         }
 
+        SetActivePassColor();
+    }
+
+    private void SetActivePassColor()
+    {
         if (client.HasActivePassBool)
         {
             hasActivePassColor = "green";
@@ -161,9 +168,16 @@ using dotNet_project.Models;
         }
     }
 
-    private void LetInClient(InfoClientModel client)
+    private async Task LetInClient(InfoClientModel client)
     {
+        List<InfoClientsPassModel> clientDataList = await _dbCP.GetInfoClientsPass(client);
 
+        clientData = clientDataList[0];
+
+        if (clientData.DaysLeft == 0 || clientData.EntiresLeft == 0)
+        {
+            clientHasValidPass = false;
+        }
     }
 
     void ManagePasses(InfoClientModel client)
@@ -174,7 +188,9 @@ using dotNet_project.Models;
 #line default
 #line hidden
 #nullable disable
-        [global::Microsoft.AspNetCore.Components.InjectAttribute] private IClientsData _db { get; set; }
+        [global::Microsoft.AspNetCore.Components.InjectAttribute] private IClientsPassesData _dbCP { get; set; }
+        [global::Microsoft.AspNetCore.Components.InjectAttribute] private IEntriesData _dbE { get; set; }
+        [global::Microsoft.AspNetCore.Components.InjectAttribute] private IClientsData _dbC { get; set; }
         [global::Microsoft.AspNetCore.Components.InjectAttribute] private NavigationManager NavigationManager { get; set; }
     }
 }

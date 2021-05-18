@@ -59,7 +59,7 @@ namespace DataLibrary
         // Get Client Info by BarCode
         public InfoClientModel GetClientInfoByBarCode(string clientBarCode)
         {
-            string sql = "SELECT c.ClientId ,c.Name, c.PhoneNumber, c.EmailAddress, c.is_deleted, c.Photo, c.CreatedDate, c.CNP, c.Address, c.BarCode, c.Notes, count(*) as NumberOfPasses, IF(isActive = 1, 1, NULL) as HasActivePass, DATE_ADD(cp.BuyDate, INTERVAL pt.DaysUntilExpires DAY) as PassExpiration FROM clients c join clients_passes cp on c.ClientId = cp.ClientId join pass_types pt on cp.PassId = pt.PassId where c.BarCode = " + clientBarCode;
+            string sql = "SELECT c.ClientId ,c.Name, c.PhoneNumber, c.EmailAddress, c.is_deleted, c.Photo, c.CreatedDate, c.CNP, c.Address, c.BarCode, c.Notes, count(*) as NumberOfPasses, IF(count(cp.isActive) >= 1, 1, NULL) as HasActivePass, DATE_ADD(cp.BuyDate, INTERVAL pt.DaysUntilExpires DAY) as PassExpiration FROM clients c join clients_passes cp on c.ClientId = cp.ClientId join pass_types pt on cp.PassId = pt.PassId where c.BarCode = " + clientBarCode;
 
             return _db.LoadData<InfoClientModel, dynamic>(sql, new { }).Result[0];
         }

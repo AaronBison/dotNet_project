@@ -5,7 +5,9 @@
 @using dotNet_project.Models
 
 @inject NavigationManager NavigationManager
-@inject IClientsData _db
+@inject IClientsData _dbC
+@inject IEntriesData _dbE
+@inject IClientsPassesData _dbCP
 
 <h1>Welcome, Admin</h1>
 
@@ -24,77 +26,86 @@
 
 @if (!clientExists)
 {
-<div class="alert alert-danger" role="alert">
-    There is no such client in the database!
-</div>
+    <div class="alert alert-danger" role="alert">
+        There is no such client in the database!
+    </div>
+}
+
+@if (!clientHasValidPass)
+{
+    <div class="alert alert-danger" role="alert">
+        Clients Pass is invalid!
+    </div>
 }
 
 @if (client.ClientId != 0)
 {
-<div class="card" style="width: 25rem;">
-    <img class="card-img-top" src="https://picsum.photos/400/200" alt="Profile picture">
+    <div class="card" style="width: 25rem;">
+        <img class="card-img-top" src="https://picsum.photos/400/200" alt="Profile picture">
 
-    <div class="card-body">
-        <h5 class="card-title">@client.Name</h5>
-        <table>
-            <tbody>
-                <tr>
-                    <td><p class="card-text"><b>Phone number: </b></p></td>
-                    <td><p class="card-text">@client.PhoneNumber</p></td>
-                </tr>
-                <tr>
-                    <td><p class="card-text"><b>Email address: </b></p></td>
-                    <td><p class="card-text">@client.EmailAddress</p></td>
-                </tr>
-                <tr>
-                    <td><p class="card-text"><b>CNP: </b></p></td>
-                    <td><p class="card-text">@client.CNP</p></td>
-                </tr>
-                <tr>
-                    <td><p class="card-text"><b>Address: </b></p></td>
-                    <td><p class="card-text">@client.Address</p></td>
-                </tr>
-                <tr>
-                    <td><p class="card-text"><b>Number of passes: </b></p></td>
-                    <td><p class="card-text">@client.NumberOfPasses</p></td>
-                </tr>
-                <tr>
-                    <td><p class="card-text"><b>Has active pass: </b></p></td>
-                    <td><p class="card-text" style="color:@hasActivePassColor;"><b>@client.HasActivePassBool</b></p></td>
-                </tr>
-                <tr>
-                    <td><p class="card-text"><b>Pass expiration: </b></p></td>
-                    <td><p class="card-text">@client.PassExpiration</p></td>
-                </tr>
-                <tr>
-                    <td><p class="card-text"><b>Notes: </b></p></td>
-                    <td><p class="card-text">@client.Notes</p></td>
-                </tr>
-            </tbody>
-        </table>
-        <hr />
-        <button class="btn btn-outline-primary" @onclick="() => LetInClient(client)" style="margin: 10px;">Let in</button>
-        <button class="btn btn-warning" @onclick="() => ManagePasses(client)" style="margin: 10px;">Manage Passes</button>
+        <div class="card-body">
+            <h5 class="card-title">@client.Name</h5>
+            <table>
+                <tbody>
+                    <tr>
+                        <td><p class="card-text"><b>Phone number: </b></p></td>
+                        <td><p class="card-text">@client.PhoneNumber</p></td>
+                    </tr>
+                    <tr>
+                        <td><p class="card-text"><b>Email address: </b></p></td>
+                        <td><p class="card-text">@client.EmailAddress</p></td>
+                    </tr>
+                    <tr>
+                        <td><p class="card-text"><b>CNP: </b></p></td>
+                        <td><p class="card-text">@client.CNP</p></td>
+                    </tr>
+                    <tr>
+                        <td><p class="card-text"><b>Address: </b></p></td>
+                        <td><p class="card-text">@client.Address</p></td>
+                    </tr>
+                    <tr>
+                        <td><p class="card-text"><b>Number of passes: </b></p></td>
+                        <td><p class="card-text">@client.NumberOfPasses</p></td>
+                    </tr>
+                    <tr>
+                        <td><p class="card-text"><b>Has active pass: </b></p></td>
+                        <td><p class="card-text" style="color:@hasActivePassColor;"><b>@client.HasActivePassBool</b></p></td>
+                    </tr>
+                    <tr>
+                        <td><p class="card-text"><b>Pass expiration: </b></p></td>
+                        <td><p class="card-text">@client.PassExpiration</p></td>
+                    </tr>
+                    <tr>
+                        <td><p class="card-text"><b>Notes: </b></p></td>
+                        <td><p class="card-text">@client.Notes</p></td>
+                    </tr>
+                </tbody>
+            </table>
+            <hr />
+            <button class="btn btn-outline-primary" @onclick="() => LetInClient(client)" style="margin: 10px;">Let in</button>
+            <button class="btn btn-warning" @onclick="() => ManagePasses(client)" style="margin: 10px;">Manage Passes</button>
+        </div>
     </div>
-</div>
 }
 
 @code{
     private ClientBarCodeModel searchBarCode = new ClientBarCodeModel();
     private InfoClientModel client = new InfoClientModel();
+    private InfoClientsPassModel clientData;
 
-    string hasActivePassColor;
+    private string hasActivePassColor;
 
-    bool clientExists = true;
+    private bool clientExists = true;
+    private bool clientHasValidPass = true;
 
     private void SearchClient()
     {
         clientExists = true;
-        client = _db.GetClientInfoByBarCode(searchBarCode.BarCode);
+        client = _dbC.GetClientInfoByBarCode(searchBarCode.BarCode);
 
-        if(client.ClientId == 0)
+        if (client.ClientId == 0)
         {
-            ClientModel clientNoPass = _db.GetClientByBarCode(searchBarCode.BarCode);
+            ClientModel clientNoPass = _dbC.GetClientByBarCode(searchBarCode.BarCode);
 
             if (clientNoPass == null)
             {
@@ -124,6 +135,11 @@
 
         }
 
+        SetActivePassColor();
+    }
+
+    private void SetActivePassColor()
+    {
         if (client.HasActivePassBool)
         {
             hasActivePassColor = "green";
@@ -134,8 +150,34 @@
         }
     }
 
-    private void LetInClient(InfoClientModel client)
+    private async Task LetInClient(InfoClientModel client)
     {
+        List<InfoClientsPassModel> clientDataList = await _dbCP.GetInfoClientsPass(client);
+
+        clientData = clientDataList[0];
+
+        // Checks if Client's active Pass is eligible for entry
+        if (clientData.DaysLeft == 0)
+        {
+            clientHasValidPass = false;
+        }
+        else
+        {
+            if(clientData.EntiresLeft == 0)
+            {
+                clientHasValidPass = false;
+            }
+            else
+            {
+                // Client is eligible, increments EntriuesCount
+                if(clientData.EntriesUntilExpires != -1)
+                {
+                    clientData.EntriesCount++;
+                    //UpdateClient
+                }
+                //Record Entry
+            }
+        }
 
     }
 

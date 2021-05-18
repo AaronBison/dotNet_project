@@ -46,5 +46,19 @@ namespace DataLibrary
 
             return _db.SaveData(sql, clientsPass);
         }
-    }
+
+        // Gets active Info Clients Pass
+        public Task<List<InfoClientsPassModel>> GetInfoClientsPass(InfoClientModel client)
+        {
+            string sql = "SELECT cp.ClientsPassesId, cp.ClientId, cp.PassId, cp.BuyDate, cp.BarCode, cp.EntriesCount, cp.IsActive, cp.HallId, pt.PassName, pt.DaysUntilExpires, pt.EntriesUntilExpires, pt.HourFrom, pt.HourUntil, pt.UsablePerDay, DATEDIFF(DATE_ADD(cp.BuyDate, INTERVAL pt.DaysUntilExpires DAY), CURDATE()) as DaysLeft FROM clients_passes cp join pass_types pt on cp.PassId = pt.PassId WHERE cp.BarCode = @BarCode AND cp.IsActive = 1;";
+
+            return _db.LoadData<InfoClientsPassModel, dynamic>(sql, client);
+        }
+
+        public Task UpdateClientsEntriesCount(ClientsPassesModel clientsPass)
+        {
+            string sql = "UPDATE clients_passes SET EntriesCount = @EntriesCount WHERE (ClientsPassesId = @ClientsPassesId);";
+            return _db.SaveData(sql, clientsPass);
+        }
+   }
 }

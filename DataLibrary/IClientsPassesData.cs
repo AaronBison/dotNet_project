@@ -10,5 +10,6 @@ namespace DataLibrary
         Task<List<ClientsPassesModel>> GetClientsPasses();
         Task DeleteClientsPass(ClientsPassesModel clientsPass);
         Task InsertClientsPass(ClientsPassesModel clientsPass);
+        Task<List<InfoClientsPassModel>> GetInfoClientsPass(InfoClientModel client);
     }
 }
