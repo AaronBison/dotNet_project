@@ -107,7 +107,7 @@ using DataLibrary.Models;
 
     protected override void OnInitialized()
     {
-        client = _db.GetClient(Id);
+        client = _db.GetClientById(Id);
     }
 
     private void UpdateClient()

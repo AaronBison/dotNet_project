@@ -19,6 +19,7 @@ else
         <thead>
             <tr>
                 <th>Pass Id</th>
+                <th>Is active</th>
                 <th>Buy date</th>
                 <th>Bar code</th>
                 <th>Entries count</th>
@@ -32,6 +33,7 @@ else
             {
             <tr>
                 <td>@clientsPass.PassId</td>
+                <td>@clientsPass.IsActive</td>
                 <td>@clientsPass.BuyDate</td>
                 <td>@clientsPass.BarCode</td>
                 <td>@clientsPass.EntriesCount</td>
@@ -53,7 +55,7 @@ else
 
     protected override void OnInitialized()
     {
-        client = _dbC.GetClient(Id);
+        client = _dbC.GetClientById(Id);
     }
 
     protected override async Task OnInitializedAsync()

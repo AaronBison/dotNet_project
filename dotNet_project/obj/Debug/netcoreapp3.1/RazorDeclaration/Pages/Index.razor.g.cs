@@ -75,6 +75,27 @@ using dotNet_project.Shared;
 #line default
 #line hidden
 #nullable disable
+#nullable restore
+#line 3 "D:\-EMTE-\4.ev\4_II\.NET\dotNet_project\dotNet_project\dotNet_project\Pages\Index.razor"
+using DataLibrary;
+
+#line default
+#line hidden
+#nullable disable
+#nullable restore
+#line 4 "D:\-EMTE-\4.ev\4_II\.NET\dotNet_project\dotNet_project\dotNet_project\Pages\Index.razor"
+using DataLibrary.Models;
+
+#line default
+#line hidden
+#nullable disable
+#nullable restore
+#line 5 "D:\-EMTE-\4.ev\4_II\.NET\dotNet_project\dotNet_project\dotNet_project\Pages\Index.razor"
+using dotNet_project.Models;
+
+#line default
+#line hidden
+#nullable disable
     [Microsoft.AspNetCore.Components.RouteAttribute("/")]
     public partial class Index : Microsoft.AspNetCore.Components.ComponentBase
     {
@@ -83,6 +104,67 @@ using dotNet_project.Shared;
         {
         }
         #pragma warning restore 1998
+#nullable restore
+#line 76 "D:\-EMTE-\4.ev\4_II\.NET\dotNet_project\dotNet_project\dotNet_project\Pages\Index.razor"
+      
+    private ClientBarCodeModel searchBarCode = new ClientBarCodeModel();
+    private InfoClientModel client = new InfoClientModel();
+
+    string hasActivePassColor;
+
+    bool clientExists = true;
+
+    private void SearchClient()
+    {
+        clientExists = true;
+        client = _db.GetClientInfoByBarCode(searchBarCode.BarCode);
+
+        if(String.IsNullOrEmpty(client.ClientId))
+        {
+            ClientModel clientNoPass = _db.GetClientByBarCode(searchBarCode.BarCode);
+
+            if (clientNoPass == null)
+            {
+                clientExists = false;
+            }
+            else
+            {
+                InfoClientModel c = new InfoClientModel
+                {
+                    ClientId = clientNoPass.ClientId,
+                    Name = clientNoPass.Name,
+                    PhoneNumber = clientNoPass.PhoneNumber,
+                    EmailAddress = clientNoPass.EmailAddress,
+                    is_deleted = clientNoPass.is_deleted,
+                    Photo = clientNoPass.Photo,
+                    CreatedDate = clientNoPass.CreatedDate,
+                    CNP = clientNoPass.CNP,
+                    Address = clientNoPass.Address,
+                    BarCode = clientNoPass.BarCode,
+                    Notes = clientNoPass.Notes,
+                    NumberOfPasses = 0,
+                    HasActivePass = 0,
+                    PassExpiration = "-",
+                };
+                client = c;
+            }
+
+        }
+
+        if (client.HasActivePassBool)
+        {
+            hasActivePassColor = "green";
+        }
+        else
+        {
+            hasActivePassColor = "red";
+        }
+    }
+
+#line default
+#line hidden
+#nullable disable
+        [global::Microsoft.AspNetCore.Components.InjectAttribute] private IClientsData _db { get; set; }
     }
 }
 #pragma warning restore 1591

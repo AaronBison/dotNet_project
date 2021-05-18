@@ -105,49 +105,50 @@ using dotNet_project.Models;
         }
         #pragma warning restore 1998
 #nullable restore
-#line 114 "D:\-EMTE-\4.ev\4_II\.NET\dotNet_project\dotNet_project\dotNet_project\Pages\Passes.razor"
-       
+#line 118 "D:\-EMTE-\4.ev\4_II\.NET\dotNet_project\dotNet_project\dotNet_project\Pages\Passes.razor"
+               
 
-    private List<PassModel> passes;
-    private DisplayPassModel newPass = new DisplayPassModel();
+            private List<PassModel> passes;
+            private DisplayPassModel newPass = new DisplayPassModel();
 
-    protected override async Task OnInitializedAsync()
-    {
-        passes = await _db.GetPasses();
-    }
+            protected override async Task OnInitializedAsync()
+            {
+                passes = await _db.GetPasses();
+            }
 
-    private async Task InsertPass()
-    {
-        PassModel p = new PassModel
-        {
-            PassName = newPass.PassName,
-            Price = newPass.Price,
-            DaysUntilExpires = newPass.DaysUntilExpires,
-            EntriesUntilExpires = newPass.EntriesUntilExpires,
-            is_deleted = false,
-            HallId = newPass.HallId,
-            HourFrom = newPass.HourFrom,
-            HourUntil = newPass.HourUntil,
-            UsablePerDay = newPass.UsablePerDay
-        };
-        await _db.InsertPass(p);
+            private async Task InsertPass()
+            {
+                PassModel p = new PassModel
+                {
+                    PassName = newPass.PassName,
+                    Price = newPass.Price,
+                    DaysUntilExpires = newPass.DaysUntilExpires,
+                    EntriesUntilExpires = newPass.EntriesUntilExpires,
+                    is_deleted = false,
+                    HallId = newPass.HallId,
+                    HourFrom = newPass.HourFrom,
+                    HourUntil = newPass.HourUntil,
+                    UsablePerDay = newPass.UsablePerDay
+                };
+                await _db.InsertPass(p);
 
-        await OnInitializedAsync();
+                await OnInitializedAsync();
 
-        newPass = new DisplayPassModel();
-    }
+                newPass = new DisplayPassModel();
+            }
 
-    private async Task DeletePass(PassModel pass)
-    {
-        await _db.DeletePass(pass);
+            private async Task DeletePass(PassModel pass)
+            {
+                await _db.DeletePass(pass);
 
-        await OnInitializedAsync();
-    }
+                await OnInitializedAsync();
+            }
 
-    void MoveToModifyPage(PassModel pass)
-    {
-        NavigationManager.NavigateTo("/passes/" + pass.PassId);
-    }
+            void MoveToModifyPage(PassModel pass)
+            {
+                NavigationManager.NavigateTo("/passes/" + pass.PassId);
+            }
+        
 
 #line default
 #line hidden

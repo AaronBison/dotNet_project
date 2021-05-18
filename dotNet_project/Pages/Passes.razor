@@ -13,144 +13,148 @@
 <hr />
 <h4>Create New Pass</h4>
 <hr />
-<EditForm Model="@newPass" OnValidSubmit="@InsertPass" style="width: 400px; margin:15px;">
-    <DataAnnotationsValidator />
-    <ValidationSummary />
+<div class="card" style="width: 30rem; margin: 0 auto; float: none; margin-bottom: 10px;">
+    <div class="card-body">
+        <EditForm Model="@newPass" OnValidSubmit="@InsertPass" style="width: 400px; margin:15px;">
+            <DataAnnotationsValidator />
+            <ValidationSummary />
 
-    <table>
-        <tbody>
-            <tr>
-                <td>
-                    <h6><b>Pass Name</b></h6>
-                    <InputText class="form-control" style="margin: 10px;" placeholder="Name" id="passname" @bind-Value="newPass.PassName" Label="PassName" />
-                </td>
-                <td>
-                    <h6><b>Price</b></h6>
-                    <InputNumber class="form-control" style="margin: 10px;" placeholder="Price" id="price" @bind-Value="newPass.Price" Label="Price" />
-                </td>
-            </tr>
-            <tr>
-                <td>
-                    <h6><b>Days until expires</b></h6>
-                    <InputNumber class="form-control" style="margin: 10px;" placeholder="Days until expires" id="daysuntilexpires" @bind-Value="newPass.DaysUntilExpires" Label="DaysUntilExpires" />
-                </td>
-                <td>
-                    <h6><b>Entries until expires</b></h6>
-                    <InputNumber class="form-control" style="margin: 10px;" placeholder="Entries until expires" id="entriesuntilexpires" @bind-Value="newPass.EntriesUntilExpires" Label="EntriesUntilExpires" />
-                </td>
-            </tr>
-            <tr>
-                <td>
-                    <h6><b>From hour</b></h6>
-                    <InputText class="form-control" style="margin: 10px;" placeholder="From hour" id="hourfrom" @bind-Value="newPass.HourFrom" Label="HourFrom" />
-                </td>
-                <td>
-                    <h6><b>Until hour</b></h6>
-                    <InputText class="form-control" style="margin: 10px;" placeholder="Until hour" id="houruntil" @bind-Value="newPass.HourUntil" Label="HourUntil" />
-                </td>
-            </tr>
-            <tr>
-                <td>
-                    <h6><b>Usable per day</b></h6>
-                    <InputNumber class="form-control" style="margin: 10px;" placeholder="Usable per day" id="usableperday" @bind-Value="newPass.UsablePerDay" Label="UsablePerDay" />
-                </td>
-                <td>
-                    <h6><b>Hall Id</b></h6>
-                    <InputNumber class="form-control" style="margin: 10px;" placeholder="Hall Id" id="hallid" @bind-Value="newPass.HallId" Label="HallId" />
-                </td>
-            </tr>
-         </tbody>
-    </table>
-
-
-    <button type="submit" class="btn btn-success" style="margin: 10px;">Create</button>
-</EditForm>
-
-<hr />
-
-<h4>Current Passes</h4>
-@if (passes == null)
-{
-    <p><em>Loading...</em></p>
-}
-else
-{
-    <table class="table table-striped">
-        <thead>
-            <tr>
-                <th>Pass Name</th>
-                <th>Price (RON)</th>
-                <th>Days until expires</th>
-                <th>Entries until expires</th>
-                <th>Hall Id</th>
-                <th>From hour</th>
-                <th>Until hour</th>
-                <th>Usable per day</th>
-                <th>Modify</th>
-                <th>Delete</th>
-            </tr>
-        </thead>
-        <tbody>
-            @foreach (var pass in passes)
-            {
-            <tr>
-                <td>@pass.PassName</td>
-                <td>@pass.Price</td>
-                <td>@pass.DaysUntilExpires</td>
-                <td>@pass.EntriesUntilExpires</td>
-                <td>@pass.HallId</td>
-                <td>@pass.HourFrom</td>
-                <td>@pass.HourUntil</td>
-                <td>@pass.UsablePerDay</td>
-                <td><button class="btn btn-outline-primary" @onclick="() => MoveToModifyPage(pass)" style="margin: 10px;">Modify</button></td>
-                <td><button class="btn btn-outline-danger" @onclick="() => DeletePass(pass)" style="margin: 10px;">Delete</button></td>
-            </tr>
-            }
-        </tbody>
-    </table>
-}
+            <table>
+                <tbody>
+                    <tr>
+                        <td>
+                            <h6><b>Pass Name</b></h6>
+                            <InputText class="form-control" style="margin: 10px;" placeholder="Name" id="passname" @bind-Value="newPass.PassName" Label="PassName" />
+                        </td>
+                        <td>
+                            <h6><b>Price</b></h6>
+                            <InputNumber class="form-control" style="margin: 10px;" placeholder="Price" id="price" @bind-Value="newPass.Price" Label="Price" />
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <h6><b>Days until expires</b></h6>
+                            <InputNumber class="form-control" style="margin: 10px;" placeholder="Days until expires" id="daysuntilexpires" @bind-Value="newPass.DaysUntilExpires" Label="DaysUntilExpires" />
+                        </td>
+                        <td>
+                            <h6><b>Entries until expires</b></h6>
+                            <InputNumber class="form-control" style="margin: 10px;" placeholder="Entries until expires" id="entriesuntilexpires" @bind-Value="newPass.EntriesUntilExpires" Label="EntriesUntilExpires" />
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <h6><b>From hour</b></h6>
+                            <InputText class="form-control" style="margin: 10px;" placeholder="From hour" id="hourfrom" @bind-Value="newPass.HourFrom" Label="HourFrom" />
+                        </td>
+                        <td>
+                            <h6><b>Until hour</b></h6>
+                            <InputText class="form-control" style="margin: 10px;" placeholder="Until hour" id="houruntil" @bind-Value="newPass.HourUntil" Label="HourUntil" />
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <h6><b>Usable per day</b></h6>
+                            <InputNumber class="form-control" style="margin: 10px;" placeholder="Usable per day" id="usableperday" @bind-Value="newPass.UsablePerDay" Label="UsablePerDay" />
+                        </td>
+                        <td>
+                            <h6><b>Hall Id</b></h6>
+                            <InputNumber class="form-control" style="margin: 10px;" placeholder="Hall Id" id="hallid" @bind-Value="newPass.HallId" Label="HallId" />
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
 
 
-@code {
+            <button type="submit" class="btn btn-success" style="margin: 10px;">Create</button>
+        </EditForm>
+        </div>
+    </div>
 
-    private List<PassModel> passes;
-    private DisplayPassModel newPass = new DisplayPassModel();
+        <hr />
 
-    protected override async Task OnInitializedAsync()
-    {
-        passes = await _db.GetPasses();
-    }
-
-    private async Task InsertPass()
-    {
-        PassModel p = new PassModel
+        <h4>Current Passes</h4>
+        @if (passes == null)
         {
-            PassName = newPass.PassName,
-            Price = newPass.Price,
-            DaysUntilExpires = newPass.DaysUntilExpires,
-            EntriesUntilExpires = newPass.EntriesUntilExpires,
-            is_deleted = false,
-            HallId = newPass.HallId,
-            HourFrom = newPass.HourFrom,
-            HourUntil = newPass.HourUntil,
-            UsablePerDay = newPass.UsablePerDay
-        };
-        await _db.InsertPass(p);
+            <p><em>Loading...</em></p>
+        }
+        else
+        {
+            <table class="table table-striped">
+                <thead>
+                    <tr>
+                        <th>Pass Name</th>
+                        <th>Price (RON)</th>
+                        <th>Days until expires</th>
+                        <th>Entries until expires</th>
+                        <th>Hall Id</th>
+                        <th>From hour</th>
+                        <th>Until hour</th>
+                        <th>Usable per day</th>
+                        <th>Modify</th>
+                        <th>Delete</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var pass in passes)
+                    {
+                        <tr>
+                            <td>@pass.PassName</td>
+                            <td>@pass.Price</td>
+                            <td>@pass.DaysUntilExpires</td>
+                            <td>@pass.EntriesUntilExpires</td>
+                            <td>@pass.HallId</td>
+                            <td>@pass.HourFrom</td>
+                            <td>@pass.HourUntil</td>
+                            <td>@pass.UsablePerDay</td>
+                            <td><button class="btn btn-outline-primary" @onclick="() => MoveToModifyPage(pass)" style="margin: 10px;">Modify</button></td>
+                            <td><button class="btn btn-outline-danger" @onclick="() => DeletePass(pass)" style="margin: 10px;">Delete</button></td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        }
 
-        await OnInitializedAsync();
 
-        newPass = new DisplayPassModel();
-    }
+        @code {
 
-    private async Task DeletePass(PassModel pass)
-    {
-        await _db.DeletePass(pass);
+            private List<PassModel> passes;
+            private DisplayPassModel newPass = new DisplayPassModel();
 
-        await OnInitializedAsync();
-    }
+            protected override async Task OnInitializedAsync()
+            {
+                passes = await _db.GetPasses();
+            }
 
-    void MoveToModifyPage(PassModel pass)
-    {
-        NavigationManager.NavigateTo("/passes/" + pass.PassId);
-    }
-}
+            private async Task InsertPass()
+            {
+                PassModel p = new PassModel
+                {
+                    PassName = newPass.PassName,
+                    Price = newPass.Price,
+                    DaysUntilExpires = newPass.DaysUntilExpires,
+                    EntriesUntilExpires = newPass.EntriesUntilExpires,
+                    is_deleted = false,
+                    HallId = newPass.HallId,
+                    HourFrom = newPass.HourFrom,
+                    HourUntil = newPass.HourUntil,
+                    UsablePerDay = newPass.UsablePerDay
+                };
+                await _db.InsertPass(p);
+
+                await OnInitializedAsync();
+
+                newPass = new DisplayPassModel();
+            }
+
+            private async Task DeletePass(PassModel pass)
+            {
+                await _db.DeletePass(pass);
+
+                await OnInitializedAsync();
+            }
+
+            void MoveToModifyPage(PassModel pass)
+            {
+                NavigationManager.NavigateTo("/passes/" + pass.PassId);
+            }
+        }

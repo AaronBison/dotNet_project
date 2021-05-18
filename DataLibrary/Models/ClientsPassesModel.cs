@@ -13,7 +13,7 @@ namespace DataLibrary.Models
         public string BarCode { get; set; }
         public int EntriesCount { get; set; }
         public int BuyPrice { get; set; }
-        public int Valid { get; set; }
+        public int IsActive { get; set; }
         public string FirstUsageDate { get; set; }
         public int HallId { get; set; }
     }

@@ -1,6 +1,130 @@
 ﻿@page "/"
 
+@using DataLibrary
+@using DataLibrary.Models
+@using dotNet_project.Models
+
+@inject IClientsData _db
+
 <h1>Welcome, Admin</h1>
 
-This is your main page. Here you can see stuff.
+<hr />
+<h3>Search Client</h3>
+<hr />
 
+<EditForm Model="@searchBarCode" OnValidSubmit="@SearchClient" style="width:400px; margin:15px;">
+
+    <h6><b>Enter Bar Code:</b></h6>
+    <InputText class="form-control" style="margin: 10px;" placeholder="Bar Code" id="barcode" @bind-Value="searchBarCode.BarCode" Label="Name" />
+
+    <button type="submit" class="btn btn-success" style="margin: 10px;">Search</button>
+
+</EditForm>
+
+@if (!clientExists)
+{
+    <p>NINCS</p>
+}
+
+@if (!String.IsNullOrEmpty(client.ClientId))
+{
+    <div class="card" style="width: 25rem;">
+        <div class="card-body">
+            <h5 class="card-title">@client.Name</h5>
+            <table>
+                <tbody>
+                    <tr>
+                        <td><p class="card-text"><b>Phone number: </b></p></td>
+                        <td><p class="card-text">@client.PhoneNumber</p></td>
+                    </tr>
+                    <tr>
+                        <td><p class="card-text"><b>Email address: </b></p></td>
+                        <td><p class="card-text">@client.EmailAddress</p></td>
+                    </tr>
+                    <tr>
+                        <td><p class="card-text"><b>CNP: </b></p></td>
+                        <td><p class="card-text">@client.CNP</p></td>
+                    </tr>
+                    <tr>
+                        <td><p class="card-text"><b>Address: </b></p></td>
+                        <td><p class="card-text">@client.Address</p></td>
+                    </tr>
+                    <tr>
+                        <td><p class="card-text"><b>Number of passes: </b></p></td>
+                        <td><p class="card-text">@client.NumberOfPasses</p></td>
+                    </tr>
+                    <tr>
+                        <td><p class="card-text"><b>Has active pass: </b></p></td>
+                        <td><p class="card-text" style="color:@hasActivePassColor;"><b>@client.HasActivePassBool</b></p></td>
+                    </tr>
+                    <tr>
+                        <td><p class="card-text"><b>Pass expiration: </b></p></td>
+                        <td><p class="card-text">@client.PassExpiration</p></td>
+                    </tr>
+                    <tr>
+                        <td><p class="card-text"><b>Notes: </b></p></td>
+                        <td><p class="card-text">@client.Notes</p></td>
+                    </tr>
+                </tbody>
+            </table>
+            <hr />
+            <a href="#" class="btn btn-primary">Let in</a>
+        </div>
+    </div>
+}
+
+@code{
+    private ClientBarCodeModel searchBarCode = new ClientBarCodeModel();
+    private InfoClientModel client = new InfoClientModel();
+
+    string hasActivePassColor;
+
+    bool clientExists = true;
+
+    private void SearchClient()
+    {
+        clientExists = true;
+        client = _db.GetClientInfoByBarCode(searchBarCode.BarCode);
+
+        if(String.IsNullOrEmpty(client.ClientId))
+        {
+            ClientModel clientNoPass = _db.GetClientByBarCode(searchBarCode.BarCode);
+
+            if (clientNoPass == null)
+            {
+                clientExists = false;
+            }
+            else
+            {
+                InfoClientModel c = new InfoClientModel
+                {
+                    ClientId = clientNoPass.ClientId,
+                    Name = clientNoPass.Name,
+                    PhoneNumber = clientNoPass.PhoneNumber,
+                    EmailAddress = clientNoPass.EmailAddress,
+                    is_deleted = clientNoPass.is_deleted,
+                    Photo = clientNoPass.Photo,
+                    CreatedDate = clientNoPass.CreatedDate,
+                    CNP = clientNoPass.CNP,
+                    Address = clientNoPass.Address,
+                    BarCode = clientNoPass.BarCode,
+                    Notes = clientNoPass.Notes,
+                    NumberOfPasses = 0,
+                    HasActivePass = 0,
+                    PassExpiration = "-",
+                };
+                client = c;
+            }
+
+        }
+
+        if (client.HasActivePassBool)
+        {
+            hasActivePassColor = "green";
+        }
+        else
+        {
+            hasActivePassColor = "red";
+        }
+    }
+}

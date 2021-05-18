@@ -24,8 +24,8 @@ namespace DataLibrary
             return _db.LoadData<ClientModel, dynamic>(sql, new { });
         }
 
-        // Get a specific Client
-        public ClientModel GetClient(string clientId)
+        // Get a Client by Id
+        public ClientModel GetClientById(string clientId)
         {
             string sql = "SELECT * FROM clients WHERE ClientId = " + clientId;
 
@@ -54,6 +54,30 @@ namespace DataLibrary
             string sql = "DELETE FROM clients WHERE (ClientId = @ClientId);";
 
             return _db.SaveData(sql, client);
+        }
+
+        // Get Client Info by BarCode
+        public InfoClientModel GetClientInfoByBarCode(string clientBarCode)
+        {
+            string sql = "SELECT c.ClientId ,c.Name, c.PhoneNumber, c.EmailAddress, c.is_deleted, c.Photo, c.CreatedDate, c.CNP, c.Address, c.BarCode, c.Notes, count(*) as NumberOfPasses, IF(isActive = 1, 1, NULL) as HasActivePass, DATE_ADD(cp.BuyDate, INTERVAL pt.DaysUntilExpires DAY) as PassExpiration FROM clients c join clients_passes cp on c.ClientId = cp.ClientId join pass_types pt on cp.PassId = pt.PassId where c.BarCode = " + clientBarCode;
+
+            return _db.LoadData<InfoClientModel, dynamic>(sql, new { }).Result[0];
+        }
+
+        // Get Client by BarCode
+        public ClientModel GetClientByBarCode(string BarCode)
+        {
+            string sql = "SELECT * FROM clients WHERE BarCode = " + BarCode;
+
+            Task<List<ClientModel>> c = _db.LoadData<ClientModel, dynamic>(sql, new { });
+            if (c.Result.Count != 0)
+            {
+                return c.Result[0];
+            }
+            else
+            {
+                return null;
+            }
         }
     }
 }
