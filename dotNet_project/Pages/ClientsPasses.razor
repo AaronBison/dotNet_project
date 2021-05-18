@@ -4,11 +4,28 @@
 @using DataLibrary.Models
 
 @inject IClientsData _dbC
+@inject IPassesData _dbP
 @inject IClientsPassesData _dbCP
 
 <hr />
 <h3>@client.Name's Passes</h3>
+<hr />
 
+
+<h4>Add Pass</h4>
+<hr />
+<EditForm Model="@passes" OnValidSubmit="@AddPassToClient" style="width:400px; margin:15px;">
+    <InputSelect id="passes" @bind-Value="selectedPassId" class="form-control">
+        @foreach (var pass in passes)
+        {
+            <option value="@pass.PassId">@pass.PassName</option>
+        }
+    </InputSelect>
+    <button type="submit" class="btn btn-success" style="margin: 10px;">Add</button>
+</EditForm>
+
+<hr />
+<h4>Current Passes</h4>
 @if (clientsPasses == null)
 {
     <p><em>Loading...</em></p>
@@ -31,17 +48,17 @@ else
         <tbody>
             @foreach (var clientsPass in clientsPasses)
             {
-            <tr>
-                <td>@clientsPass.PassId</td>
-                <td>@clientsPass.IsActive</td>
-                <td>@clientsPass.BuyDate</td>
-                <td>@clientsPass.BarCode</td>
-                <td>@clientsPass.EntriesCount</td>
-                <td>@clientsPass.BuyPrice</td>
-                <td>@clientsPass.FirstUsageDate</td>
-                <td>@clientsPass.HallId</td>
-                <td><button class="btn btn-outline-danger" @onclick="() => DeleteClientsPass(clientsPass)" style="margin: 10px;">Delete</button></td>
-            </tr>
+                <tr>
+                    <td>@clientsPass.PassId</td>
+                    <td>@clientsPass.IsActive</td>
+                    <td>@clientsPass.BuyDate</td>
+                    <td>@clientsPass.BarCode</td>
+                    <td>@clientsPass.EntriesCount</td>
+                    <td>@clientsPass.BuyPrice</td>
+                    <td>@clientsPass.FirstUsageDate</td>
+                    <td>@clientsPass.HallId</td>
+                    <td><button class="btn btn-outline-danger" @onclick="() => DeleteClientsPass(clientsPass)" style="margin: 10px;">Delete</button></td>
+                </tr>
             }
         </tbody>
     </table>
@@ -51,7 +68,10 @@ else
     [Parameter]
     public string Id { get; set; }
     private ClientModel client;
+    private List<PassModel> passes;
     private List<ClientsPassesModel> clientsPasses;
+    private string selectedPassId;
+
 
     protected override void OnInitialized()
     {
@@ -61,6 +81,7 @@ else
     protected override async Task OnInitializedAsync()
     {
         clientsPasses = await _dbCP.GetClientsPass(client);
+        passes = await _dbP.GetPasses();
     }
 
     private async Task DeleteClientsPass(ClientsPassesModel clientsPass)
@@ -70,4 +91,22 @@ else
         await OnInitializedAsync();
     }
 
+    private async Task AddPassToClient()
+    {
+        ClientsPassesModel cp = new ClientsPassesModel
+        {
+            ClientId = client.ClientId,
+            PassId = Int32.Parse(selectedPassId),
+            BuyDate = DateTime.UtcNow.ToString("yyyy-MM-dd"),
+            BarCode = client.BarCode,
+            EntriesCount = 0,
+            BuyPrice = passes.Find(x => x.PassId.Equals(Int32.Parse(selectedPassId))).Price,
+            IsActive = 0,
+            HallId = passes.Find(x => x.PassId.Equals(Int32.Parse(selectedPassId))).HallId
+
+        };
+        await _dbCP.InsertClientsPass(cp);
+
+        await OnInitializedAsync();
+    }
 }

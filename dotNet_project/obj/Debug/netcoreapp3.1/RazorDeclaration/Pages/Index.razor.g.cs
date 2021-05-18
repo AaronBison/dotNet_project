@@ -105,7 +105,7 @@ using dotNet_project.Models;
         }
         #pragma warning restore 1998
 #nullable restore
-#line 78 "D:\-EMTE-\4.ev\4_II\.NET\dotNet_project\dotNet_project\dotNet_project\Pages\Index.razor"
+#line 80 "D:\-EMTE-\4.ev\4_II\.NET\dotNet_project\dotNet_project\dotNet_project\Pages\Index.razor"
       
     private ClientBarCodeModel searchBarCode = new ClientBarCodeModel();
     private InfoClientModel client = new InfoClientModel();
@@ -119,7 +119,7 @@ using dotNet_project.Models;
         clientExists = true;
         client = _db.GetClientInfoByBarCode(searchBarCode.BarCode);
 
-        if(String.IsNullOrEmpty(client.ClientId))
+        if(client.ClientId == 0)
         {
             ClientModel clientNoPass = _db.GetClientByBarCode(searchBarCode.BarCode);
 
@@ -166,10 +166,16 @@ using dotNet_project.Models;
 
     }
 
+    void ManagePasses(InfoClientModel client)
+    {
+        NavigationManager.NavigateTo("/clients/passes/" + client.ClientId);
+    }
+
 #line default
 #line hidden
 #nullable disable
         [global::Microsoft.AspNetCore.Components.InjectAttribute] private IClientsData _db { get; set; }
+        [global::Microsoft.AspNetCore.Components.InjectAttribute] private NavigationManager NavigationManager { get; set; }
     }
 }
 #pragma warning restore 1591

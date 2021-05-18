@@ -4,6 +4,7 @@
 @using DataLibrary.Models
 @using dotNet_project.Models
 
+@inject NavigationManager NavigationManager
 @inject IClientsData _db
 
 <h1>Welcome, Admin</h1>
@@ -28,7 +29,7 @@
 </div>
 }
 
-@if (!String.IsNullOrEmpty(client.ClientId))
+@if (client.ClientId != 0)
 {
     <div class="card" style="width: 25rem;">
         <div class="card-body">
@@ -71,6 +72,7 @@
             </table>
             <hr />
             <button class="btn btn-outline-primary" @onclick="() => LetInClient(client)" style="margin: 10px;">Let in</button>
+            <button class="btn btn-warning" @onclick="() => ManagePasses(client)" style="margin: 10px;">Manage Passes</button>
         </div>
     </div>
 }
@@ -88,7 +90,7 @@
         clientExists = true;
         client = _db.GetClientInfoByBarCode(searchBarCode.BarCode);
 
-        if(String.IsNullOrEmpty(client.ClientId))
+        if(client.ClientId == 0)
         {
             ClientModel clientNoPass = _db.GetClientByBarCode(searchBarCode.BarCode);
 
@@ -133,5 +135,10 @@
     private void LetInClient(InfoClientModel client)
     {
 
+    }
+
+    void ManagePasses(InfoClientModel client)
+    {
+        NavigationManager.NavigateTo("/clients/passes/" + client.ClientId);
     }
 }

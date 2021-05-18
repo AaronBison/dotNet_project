@@ -58,56 +58,77 @@
 
             <button type="submit" class="btn btn-success" style="margin: 10px;">Add</button>
         </EditForm>
-        </div>
     </div>
+</div>
 
-        <hr />
+@if (clientAddSucces)
+{
+    <div class="alert alert-success" role="alert">
+        @clientAddMessage
+    </div>
+}
 
-        <h4>Current Clients</h4>
-        @if (clients == null)
-        {
-            <p><em>Loading...</em></p>
-        }
-        else
-        {
-            <table class="table table-striped">
-                <thead>
-                    <tr>
-                        <th>Name</th>
-                        <th>PhoneNumber</th>
-                        <th>EmailAddress</th>
-                        <th>CNP</th>
-                        <th>Address</th>
-                        <th>Notes</th>
-                        <th>See Passes</th>
-                        <th>Modify</th>
-                        <th>Delete</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    @foreach (var client in clients)
-                    {
-                        <tr>
-                            <td>@client.Name</td>
-                            <td>@client.PhoneNumber</td>
-                            <td>@client.EmailAddress</td>
-                            <td>@client.CNP</td>
-                            <td>@client.Address</td>
-                            <td>@client.Notes</td>
-                            <td><button class="btn btn-outline-primary" @onclick="() => MoveToClientsPassesPage(client)" style="margin: 10px;">See Passes</button></td>
-                            <td><button class="btn btn-outline-warning" @onclick="() => MoveToModifyPage(client)" style="margin: 10px;">Modify</button></td>
-                            <td><button class="btn btn-outline-danger" @onclick="() => DeleteClient(client)" style="margin: 10px;">Delete</button></td>
-                        </tr>
-                    }
-                </tbody>
-            </table>
-        }
+@if (clientDeleteSucces)
+{
+    <div class="alert alert-success" role="alert">
+        @clientDeleteMessage
+    </div>
+}
+
+<hr />
+
+<h4>Current Clients</h4>
+@if (clients == null)
+{
+    <p><em>Loading...</em></p>
+}
+else
+{
+    <table class="table table-striped">
+        <thead>
+            <tr>
+                <th>Name</th>
+                <th>PhoneNumber</th>
+                <th>EmailAddress</th>
+                <th>CNP</th>
+                <th>Address</th>
+                <th>Notes</th>
+                <th>See Passes</th>
+                <th>Modify</th>
+                <th>Delete</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var client in clients)
+            {
+                <tr>
+                    <td>@client.Name</td>
+                    <td>@client.PhoneNumber</td>
+                    <td>@client.EmailAddress</td>
+                    <td>@client.CNP</td>
+                    <td>@client.Address</td>
+                    <td>@client.Notes</td>
+                    <td><button class="btn btn-outline-primary" @onclick="() => MoveToClientsPassesPage(client)" style="margin: 10px;">See Passes</button></td>
+                    <td><button class="btn btn-outline-warning" @onclick="() => MoveToModifyPage(client)" style="margin: 10px;">Modify</button></td>
+                    <td><button class="btn btn-outline-danger" @onclick="() => DeleteClient(client)" style="margin: 10px;">Delete</button></td>
+                </tr>
+            }
+        </tbody>
+    </table>
+}
 
 
 @code {
 
     private List<ClientModel> clients;
     private DisplayClientModel newClient = new DisplayClientModel();
+
+    bool clientAddSucces = false;
+    bool clientDeleteSucces = false;
+
+    string clientAddMessage = "Client added succesfully!";
+    string clientDeleteMessage = "Client deleted succesfully!";
+
 
     protected override async Task OnInitializedAsync()
     {
@@ -136,6 +157,8 @@
         await OnInitializedAsync();
 
         newClient = new DisplayClientModel();
+
+        clientAddSucces = true;
     }
 
     private async Task DeleteClient(ClientModel client)
@@ -143,6 +166,8 @@
         await _db.DeleteClient(client);
 
         await OnInitializedAsync();
+
+        clientDeleteSucces = true;
     }
 
     void MoveToModifyPage(ClientModel client)

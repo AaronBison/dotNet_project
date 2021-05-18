@@ -15,7 +15,7 @@ namespace dotNet_project.Models
         public string PassName { get; set; }
 
         [Required]
-        public double Price { get; set; }
+        public int Price { get; set; }
         public int DaysUntilExpires { get; set; }
         public int EntriesUntilExpires { get; set; }
         public bool is_deleted { get; set; }

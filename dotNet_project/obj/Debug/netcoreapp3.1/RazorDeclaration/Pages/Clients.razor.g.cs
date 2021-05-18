@@ -111,11 +111,18 @@ using Microsoft.AspNetCore.Components;
         }
         #pragma warning restore 1998
 #nullable restore
-#line 107 "D:\-EMTE-\4.ev\4_II\.NET\dotNet_project\dotNet_project\dotNet_project\Pages\Clients.razor"
+#line 121 "D:\-EMTE-\4.ev\4_II\.NET\dotNet_project\dotNet_project\dotNet_project\Pages\Clients.razor"
        
 
     private List<ClientModel> clients;
     private DisplayClientModel newClient = new DisplayClientModel();
+
+    bool clientAddSucces = false;
+    bool clientDeleteSucces = false;
+
+    string clientAddMessage = "Client added succesfully!";
+    string clientDeleteMessage = "Client deleted succesfully!";
+
 
     protected override async Task OnInitializedAsync()
     {
@@ -144,6 +151,8 @@ using Microsoft.AspNetCore.Components;
         await OnInitializedAsync();
 
         newClient = new DisplayClientModel();
+
+        clientAddSucces = true;
     }
 
     private async Task DeleteClient(ClientModel client)
@@ -151,6 +160,8 @@ using Microsoft.AspNetCore.Components;
         await _db.DeleteClient(client);
 
         await OnInitializedAsync();
+
+        clientDeleteSucces = true;
     }
 
     void MoveToModifyPage(ClientModel client)

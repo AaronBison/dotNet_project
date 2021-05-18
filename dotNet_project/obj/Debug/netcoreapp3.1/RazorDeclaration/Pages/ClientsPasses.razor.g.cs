@@ -98,12 +98,15 @@ using DataLibrary.Models;
         }
         #pragma warning restore 1998
 #nullable restore
-#line 50 "D:\-EMTE-\4.ev\4_II\.NET\dotNet_project\dotNet_project\dotNet_project\Pages\ClientsPasses.razor"
+#line 67 "D:\-EMTE-\4.ev\4_II\.NET\dotNet_project\dotNet_project\dotNet_project\Pages\ClientsPasses.razor"
        
     [Parameter]
     public string Id { get; set; }
     private ClientModel client;
+    private List<PassModel> passes;
     private List<ClientsPassesModel> clientsPasses;
+    private string selectedPassId;
+
 
     protected override void OnInitialized()
     {
@@ -113,6 +116,7 @@ using DataLibrary.Models;
     protected override async Task OnInitializedAsync()
     {
         clientsPasses = await _dbCP.GetClientsPass(client);
+        passes = await _dbP.GetPasses();
     }
 
     private async Task DeleteClientsPass(ClientsPassesModel clientsPass)
@@ -122,11 +126,30 @@ using DataLibrary.Models;
         await OnInitializedAsync();
     }
 
+    private async Task AddPassToClient()
+    {
+        ClientsPassesModel cp = new ClientsPassesModel
+        {
+            ClientId = client.ClientId,
+            PassId = Int32.Parse(selectedPassId),
+            BuyDate = DateTime.UtcNow.ToString("yyyy-MM-dd"),
+            BarCode = client.BarCode,
+            EntriesCount = 0,
+            BuyPrice = passes.Find(x => x.PassId.Equals(Int32.Parse(selectedPassId))).Price,
+            IsActive = 0,
+            HallId = passes.Find(x => x.PassId.Equals(Int32.Parse(selectedPassId))).HallId
+
+        };
+        await _dbCP.InsertClientsPass(cp);
+
+        await OnInitializedAsync();
+    }
 
 #line default
 #line hidden
 #nullable disable
         [global::Microsoft.AspNetCore.Components.InjectAttribute] private IClientsPassesData _dbCP { get; set; }
+        [global::Microsoft.AspNetCore.Components.InjectAttribute] private IPassesData _dbP { get; set; }
         [global::Microsoft.AspNetCore.Components.InjectAttribute] private IClientsData _dbC { get; set; }
     }
 }

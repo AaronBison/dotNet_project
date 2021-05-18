@@ -38,5 +38,13 @@ namespace DataLibrary
 
             return _db.SaveData(sql, clientsPass);
         }
+
+        // Insert Clients Pass connection
+        public Task InsertClientsPass(ClientsPassesModel clientsPass)
+        {
+            string sql = "INSERT INTO clients_passes (ClientId, PassId, BuyDate, BarCode, EntriesCount, BuyPrice, IsActive, FirstUsageDate, HallId) VALUES (@ClientId, @PassId, @BuyDate, @BarCode, @EntriesCount, @BuyPrice, @IsActive, @FirstUsageDate, @HallId);";
+
+            return _db.SaveData(sql, clientsPass);
+        }
     }
 }
