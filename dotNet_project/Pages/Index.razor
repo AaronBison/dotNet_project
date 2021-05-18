@@ -23,7 +23,9 @@
 
 @if (!clientExists)
 {
-    <p>NINCS</p>
+<div class="alert alert-danger" role="alert">
+    There is no such client in the database!
+</div>
 }
 
 @if (!String.IsNullOrEmpty(client.ClientId))
@@ -68,7 +70,7 @@
                 </tbody>
             </table>
             <hr />
-            <a href="#" class="btn btn-primary">Let in</a>
+            <button class="btn btn-outline-primary" @onclick="() => LetInClient(client)" style="margin: 10px;">Let in</button>
         </div>
     </div>
 }
@@ -126,5 +128,10 @@
         {
             hasActivePassColor = "red";
         }
+    }
+
+    private void LetInClient(InfoClientModel client)
+    {
+
     }
 }
