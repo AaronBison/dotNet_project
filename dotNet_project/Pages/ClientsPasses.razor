@@ -43,22 +43,25 @@ else
                 <th>Buy price</th>
                 <th>First usage date</th>
                 <th>Hall Id</th>
+                <th>Activate</th>
+                <th>Delete</th>
             </tr>
         </thead>
         <tbody>
             @foreach (var clientsPass in clientsPasses)
             {
-                <tr>
-                    <td>@clientsPass.PassId</td>
-                    <td>@clientsPass.IsActiveBool</td>
-                    <td>@clientsPass.BuyDate</td>
-                    <td>@clientsPass.BarCode</td>
-                    <td>@clientsPass.EntriesCount</td>
-                    <td>@clientsPass.BuyPrice</td>
-                    <td>@clientsPass.FirstUsageDate</td>
-                    <td>@clientsPass.HallId</td>
-                    <td><button class="btn btn-outline-danger" @onclick="() => DeleteClientsPass(clientsPass)" style="margin: 10px;">Delete</button></td>
-                </tr>
+            <tr>
+                <td>@clientsPass.PassId</td>
+                <td>@clientsPass.IsActiveBool</td>
+                <td>@clientsPass.BuyDate</td>
+                <td>@clientsPass.BarCode</td>
+                <td>@clientsPass.EntriesCount</td>
+                <td>@clientsPass.BuyPrice</td>
+                <td>@clientsPass.FirstUsageDate</td>
+                <td>@clientsPass.HallId</td>
+                <td><button class="btn btn-outline-primary" @onclick="() => DeleteClientsPass(clientsPass)" style="margin: 10px;">Delete</button></td>
+                <td><button class="btn btn-outline-danger" @onclick="() => DeleteClientsPass(clientsPass)" style="margin: 10px;">Delete</button></td>
+            </tr>
             }
         </tbody>
     </table>

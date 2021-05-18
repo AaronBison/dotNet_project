@@ -8,6 +8,7 @@ namespace DataLibrary.Models
     {
         public int EntryId { get; set; }
         public string Name { get; set; }
+        public int ClientId { get; set; }
         public int PassId { get; set; }
         public string Date { get; set; }
         public string InsertedBy { get; set; }

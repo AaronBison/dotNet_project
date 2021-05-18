@@ -22,5 +22,13 @@ namespace DataLibrary
 
             return _db.LoadData<EntryModel, dynamic>(sql, new { });
         }
+
+        // Insert Entry
+        public Task InsertEntry(EntryModel entry)
+        {
+            string sql = "INSERT INTO entries (ClientId, PassId, Date, InsertedBy, BarCode, HallId) VALUES (@ClientId, @PassId, @Date, @InsertedBy, @BarCode, @HallId);";
+
+            return _db.SaveData(sql, entry);
+        }
     }
 }

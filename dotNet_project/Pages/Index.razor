@@ -30,11 +30,16 @@
         There is no such client in the database!
     </div>
 }
-
 @if (!clientHasValidPass)
 {
     <div class="alert alert-danger" role="alert">
         Clients Pass is invalid!
+    </div>
+}
+@if (succesfullEntry)
+{
+    <div class="alert alert-success" role="alert">
+        Succesfull entry! Welcome!
     </div>
 }
 
@@ -97,9 +102,12 @@
 
     private bool clientExists = true;
     private bool clientHasValidPass = true;
+    private bool succesfullEntry = false;
 
     private void SearchClient()
     {
+        clientHasValidPass = true;
+        succesfullEntry = false;
         clientExists = true;
         client = _dbC.GetClientInfoByBarCode(searchBarCode.BarCode);
 
@@ -152,6 +160,9 @@
 
     private async Task LetInClient(InfoClientModel client)
     {
+        clientExists = true;
+        clientHasValidPass = true;
+        succesfullEntry = false;
         List<InfoClientsPassModel> clientDataList = await _dbCP.GetInfoClientsPass(client);
 
         clientData = clientDataList[0];
@@ -163,19 +174,44 @@
         }
         else
         {
-            if(clientData.EntiresLeft == 0)
+            if (clientData.EntiresLeft == 0)
             {
                 clientHasValidPass = false;
             }
             else
             {
                 // Client is eligible, increments EntriuesCount
-                if(clientData.EntriesUntilExpires != -1)
+                if (clientData.EntriesUntilExpires != -1)
                 {
                     clientData.EntriesCount++;
-                    //UpdateClient
+                    ClientsPassesModel c = new ClientsPassesModel
+                    {
+                        ClientsPassesId = clientData.ClientsPassesId,
+                        ClientId = clientData.ClientId,
+                        PassId = clientData.PassId,
+                        BuyDate = clientData.BuyDate,
+                        BarCode = clientData.BarCode,
+                        EntriesCount = clientData.EntriesCount,
+                        HallId = clientData.HallId
+                    };
+
+                    await _dbCP.UpdateClientsEntriesCount(c);
                 }
+
                 //Record Entry
+                EntryModel entry = new EntryModel
+                {
+                    ClientId = clientData.ClientId,
+                    PassId = clientData.PassId,
+                    Date = DateTime.UtcNow.ToString("yyyy-MM-dd"),
+                    BarCode = clientData.BarCode,
+                    HallId = clientData.HallId
+                };
+
+                succesfullEntry = true;
+                client.ClientId = 0;
+                searchBarCode = new ClientBarCodeModel();
+                await _dbE.InsertEntry(entry);
             }
         }
 

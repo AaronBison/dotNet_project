@@ -7,5 +7,6 @@ namespace DataLibrary
     public interface IEntriesData
     {
         Task<List<EntryModel>> GetEntries();
+        Task InsertEntry(EntryModel entry);
     }
 }

@@ -105,7 +105,7 @@ using dotNet_project.Models;
         }
         #pragma warning restore 1998
 #nullable restore
-#line 91 "D:\-EMTE-\4.ev\4_II\.NET\dotNet_project\dotNet_project\dotNet_project\Pages\Index.razor"
+#line 96 "D:\-EMTE-\4.ev\4_II\.NET\dotNet_project\dotNet_project\dotNet_project\Pages\Index.razor"
       
     private ClientBarCodeModel searchBarCode = new ClientBarCodeModel();
     private InfoClientModel client = new InfoClientModel();
@@ -115,9 +115,12 @@ using dotNet_project.Models;
 
     private bool clientExists = true;
     private bool clientHasValidPass = true;
+    private bool succesfullEntry = false;
 
     private void SearchClient()
     {
+        clientHasValidPass = true;
+        succesfullEntry = false;
         clientExists = true;
         client = _dbC.GetClientInfoByBarCode(searchBarCode.BarCode);
 
@@ -170,14 +173,61 @@ using dotNet_project.Models;
 
     private async Task LetInClient(InfoClientModel client)
     {
+        clientExists = true;
+        clientHasValidPass = true;
+        succesfullEntry = false;
         List<InfoClientsPassModel> clientDataList = await _dbCP.GetInfoClientsPass(client);
 
         clientData = clientDataList[0];
 
-        if (clientData.DaysLeft == 0 || clientData.EntiresLeft == 0)
+        // Checks if Client's active Pass is eligible for entry
+        if (clientData.DaysLeft == 0)
         {
             clientHasValidPass = false;
         }
+        else
+        {
+            if (clientData.EntiresLeft == 0)
+            {
+                clientHasValidPass = false;
+            }
+            else
+            {
+                // Client is eligible, increments EntriuesCount
+                if (clientData.EntriesUntilExpires != -1)
+                {
+                    clientData.EntriesCount++;
+                    ClientsPassesModel c = new ClientsPassesModel
+                    {
+                        ClientsPassesId = clientData.ClientsPassesId,
+                        ClientId = clientData.ClientId,
+                        PassId = clientData.PassId,
+                        BuyDate = clientData.BuyDate,
+                        BarCode = clientData.BarCode,
+                        EntriesCount = clientData.EntriesCount,
+                        HallId = clientData.HallId
+                    };
+
+                    await _dbCP.UpdateClientsEntriesCount(c);
+                }
+
+                //Record Entry
+                EntryModel entry = new EntryModel
+                {
+                    ClientId = clientData.ClientId,
+                    PassId = clientData.PassId,
+                    Date = DateTime.UtcNow.ToString("yyyy-MM-dd"),
+                    BarCode = clientData.BarCode,
+                    HallId = clientData.HallId
+                };
+
+                succesfullEntry = true;
+                client.ClientId = 0;
+                searchBarCode = new ClientBarCodeModel();
+                await _dbE.InsertEntry(entry);
+            }
+        }
+
     }
 
     void ManagePasses(InfoClientModel client)
