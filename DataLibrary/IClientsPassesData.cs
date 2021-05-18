@@ -12,5 +12,7 @@ namespace DataLibrary
         Task InsertClientsPass(ClientsPassesModel clientsPass);
         Task<List<InfoClientsPassModel>> GetInfoClientsPass(InfoClientModel client);
         Task UpdateClientsEntriesCount(ClientsPassesModel clientsPass);
+        Task ActivateClientsPass(ClientsPassesModel clientsPass);
+        Task DeactivateAllClientsPasses(ClientsPassesModel clientsPass);
     }
 }

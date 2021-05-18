@@ -60,5 +60,19 @@ namespace DataLibrary
             string sql = "UPDATE clients_passes SET EntriesCount = @EntriesCount WHERE (ClientsPassesId = @ClientsPassesId);";
             return _db.SaveData(sql, clientsPass);
         }
-   }
+
+        // Deactivates all ClientsPasses of a specific client
+        public Task DeactivateAllClientsPasses(ClientsPassesModel clientsPass)
+        {
+            string sql = "UPDATE clients_passes SET IsActive = 0 WHERE (ClientId = @ClientId);";
+            return _db.SaveData(sql, clientsPass);
+        }
+
+        // Activates ClientsPass
+        public Task ActivateClientsPass(ClientsPassesModel clientsPass)
+        {
+            string sql = "UPDATE clients_passes SET IsActive = 1 WHERE (ClientsPassesId = @ClientsPassesId);";
+            return _db.SaveData(sql, clientsPass);
+        }
+    }
 }

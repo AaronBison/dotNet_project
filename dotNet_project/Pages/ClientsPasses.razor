@@ -59,7 +59,7 @@ else
                 <td>@clientsPass.BuyPrice</td>
                 <td>@clientsPass.FirstUsageDate</td>
                 <td>@clientsPass.HallId</td>
-                <td><button class="btn btn-outline-primary" @onclick="() => DeleteClientsPass(clientsPass)" style="margin: 10px;">Delete</button></td>
+                <td><button class="btn btn-outline-primary" @onclick="() => ActivateClientsPass(clientsPass)" style="margin: 10px;">Activate</button></td>
                 <td><button class="btn btn-outline-danger" @onclick="() => DeleteClientsPass(clientsPass)" style="margin: 10px;">Delete</button></td>
             </tr>
             }
@@ -90,6 +90,15 @@ else
     private async Task DeleteClientsPass(ClientsPassesModel clientsPass)
     {
         await _dbCP.DeleteClientsPass(clientsPass);
+
+        await OnInitializedAsync();
+    }
+
+    private async Task ActivateClientsPass(ClientsPassesModel clientsPass)
+    {
+
+        await _dbCP.DeactivateAllClientsPasses(clientsPass);
+        await _dbCP.ActivateClientsPass(clientsPass);
 
         await OnInitializedAsync();
     }

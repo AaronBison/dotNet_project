@@ -98,7 +98,7 @@ using DataLibrary.Models;
         }
         #pragma warning restore 1998
 #nullable restore
-#line 67 "D:\-EMTE-\4.ev\4_II\.NET\dotNet_project\dotNet_project\dotNet_project\Pages\ClientsPasses.razor"
+#line 70 "D:\-EMTE-\4.ev\4_II\.NET\dotNet_project\dotNet_project\dotNet_project\Pages\ClientsPasses.razor"
        
     [Parameter]
     public string Id { get; set; }
@@ -122,6 +122,15 @@ using DataLibrary.Models;
     private async Task DeleteClientsPass(ClientsPassesModel clientsPass)
     {
         await _dbCP.DeleteClientsPass(clientsPass);
+
+        await OnInitializedAsync();
+    }
+
+    private async Task ActivateClientsPass(ClientsPassesModel clientsPass)
+    {
+
+        await _dbCP.DeactivateAllClientsPasses(clientsPass);
+        await _dbCP.ActivateClientsPass(clientsPass);
 
         await OnInitializedAsync();
     }
