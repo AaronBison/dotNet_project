@@ -8,5 +8,6 @@ namespace DataLibrary
     {
         Task<List<ClientsPassesModel>> GetClientsPass(ClientModel clientId);
         Task<List<ClientsPassesModel>> GetClientsPasses();
+        Task DeleteClientsPass(ClientsPassesModel clientsPass);
     }
 }

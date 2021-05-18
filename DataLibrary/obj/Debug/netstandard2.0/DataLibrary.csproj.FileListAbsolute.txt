@@ -7,3 +7,12 @@ D:\-EMTE-\4.ev\4_II\.NET\dotNet_project\DataLibrary\obj\Debug\netstandard2.0\Dat
 D:\-EMTE-\4.ev\4_II\.NET\dotNet_project\DataLibrary\obj\Debug\netstandard2.0\DataLibrary.csproj.CoreCompileInputs.cache
 D:\-EMTE-\4.ev\4_II\.NET\dotNet_project\DataLibrary\obj\Debug\netstandard2.0\DataLibrary.dll
 D:\-EMTE-\4.ev\4_II\.NET\dotNet_project\DataLibrary\obj\Debug\netstandard2.0\DataLibrary.pdb
+D:\-EMTE-\4.ev\4_II\.NET\dotNet_project\dotNet_project\DataLibrary\bin\Debug\netstandard2.0\DataLibrary.deps.json
+D:\-EMTE-\4.ev\4_II\.NET\dotNet_project\dotNet_project\DataLibrary\bin\Debug\netstandard2.0\DataLibrary.dll
+D:\-EMTE-\4.ev\4_II\.NET\dotNet_project\dotNet_project\DataLibrary\bin\Debug\netstandard2.0\DataLibrary.pdb
+D:\-EMTE-\4.ev\4_II\.NET\dotNet_project\dotNet_project\DataLibrary\obj\Debug\netstandard2.0\DataLibrary.csprojAssemblyReference.cache
+D:\-EMTE-\4.ev\4_II\.NET\dotNet_project\dotNet_project\DataLibrary\obj\Debug\netstandard2.0\DataLibrary.AssemblyInfoInputs.cache
+D:\-EMTE-\4.ev\4_II\.NET\dotNet_project\dotNet_project\DataLibrary\obj\Debug\netstandard2.0\DataLibrary.AssemblyInfo.cs
+D:\-EMTE-\4.ev\4_II\.NET\dotNet_project\dotNet_project\DataLibrary\obj\Debug\netstandard2.0\DataLibrary.csproj.CoreCompileInputs.cache
+D:\-EMTE-\4.ev\4_II\.NET\dotNet_project\dotNet_project\DataLibrary\obj\Debug\netstandard2.0\DataLibrary.dll
+D:\-EMTE-\4.ev\4_II\.NET\dotNet_project\dotNet_project\DataLibrary\obj\Debug\netstandard2.0\DataLibrary.pdb

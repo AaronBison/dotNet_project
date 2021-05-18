@@ -28,16 +28,17 @@ else
             </tr>
         </thead>
         <tbody>
-            @foreach (var clientPass in clientsPasses)
+            @foreach (var clientsPass in clientsPasses)
             {
             <tr>
-                <td>@clientPass.PassId</td>
-                <td>@clientPass.BuyDate</td>
-                <td>@clientPass.BarCode</td>
-                <td>@clientPass.EntriesCount</td>
-                <td>@clientPass.BuyPrice</td>
-                <td>@clientPass.FirstUsageDate</td>
-                <td>@clientPass.HallId</td>
+                <td>@clientsPass.PassId</td>
+                <td>@clientsPass.BuyDate</td>
+                <td>@clientsPass.BarCode</td>
+                <td>@clientsPass.EntriesCount</td>
+                <td>@clientsPass.BuyPrice</td>
+                <td>@clientsPass.FirstUsageDate</td>
+                <td>@clientsPass.HallId</td>
+                <td><button class="btn btn-outline-danger" @onclick="() => DeleteClientsPass(clientsPass)" style="margin: 10px;">Delete</button></td>
             </tr>
             }
         </tbody>
@@ -58,6 +59,13 @@ else
     protected override async Task OnInitializedAsync()
     {
         clientsPasses = await _dbCP.GetClientsPass(client);
+    }
+
+    private async Task DeleteClientsPass(ClientsPassesModel clientsPass)
+    {
+        await _dbCP.DeleteClientsPass(clientsPass);
+
+        await OnInitializedAsync();
     }
 
 }

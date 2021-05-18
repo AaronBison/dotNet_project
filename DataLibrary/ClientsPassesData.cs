@@ -31,5 +31,12 @@ namespace DataLibrary
 
             return _db.LoadData<ClientsPassesModel, dynamic>(sql, client);
         }
+        // Deletes Clients Pass
+        public Task DeleteClientsPass(ClientsPassesModel clientsPass)
+        {
+            string sql = "DELETE FROM clients_passes WHERE (ClientsPassesId = @ClientsPassesId);";
+
+            return _db.SaveData(sql, clientsPass);
+        }
     }
 }
