@@ -31,50 +31,52 @@
 
 @if (client.ClientId != 0)
 {
-    <div class="card" style="width: 25rem;">
-        <div class="card-body">
-            <h5 class="card-title">@client.Name</h5>
-            <table>
-                <tbody>
-                    <tr>
-                        <td><p class="card-text"><b>Phone number: </b></p></td>
-                        <td><p class="card-text">@client.PhoneNumber</p></td>
-                    </tr>
-                    <tr>
-                        <td><p class="card-text"><b>Email address: </b></p></td>
-                        <td><p class="card-text">@client.EmailAddress</p></td>
-                    </tr>
-                    <tr>
-                        <td><p class="card-text"><b>CNP: </b></p></td>
-                        <td><p class="card-text">@client.CNP</p></td>
-                    </tr>
-                    <tr>
-                        <td><p class="card-text"><b>Address: </b></p></td>
-                        <td><p class="card-text">@client.Address</p></td>
-                    </tr>
-                    <tr>
-                        <td><p class="card-text"><b>Number of passes: </b></p></td>
-                        <td><p class="card-text">@client.NumberOfPasses</p></td>
-                    </tr>
-                    <tr>
-                        <td><p class="card-text"><b>Has active pass: </b></p></td>
-                        <td><p class="card-text" style="color:@hasActivePassColor;"><b>@client.HasActivePassBool</b></p></td>
-                    </tr>
-                    <tr>
-                        <td><p class="card-text"><b>Pass expiration: </b></p></td>
-                        <td><p class="card-text">@client.PassExpiration</p></td>
-                    </tr>
-                    <tr>
-                        <td><p class="card-text"><b>Notes: </b></p></td>
-                        <td><p class="card-text">@client.Notes</p></td>
-                    </tr>
-                </tbody>
-            </table>
-            <hr />
-            <button class="btn btn-outline-primary" @onclick="() => LetInClient(client)" style="margin: 10px;">Let in</button>
-            <button class="btn btn-warning" @onclick="() => ManagePasses(client)" style="margin: 10px;">Manage Passes</button>
-        </div>
+<div class="card" style="width: 25rem;">
+    <img class="card-img-top" src="https://picsum.photos/400/200" alt="Profile picture">
+
+    <div class="card-body">
+        <h5 class="card-title">@client.Name</h5>
+        <table>
+            <tbody>
+                <tr>
+                    <td><p class="card-text"><b>Phone number: </b></p></td>
+                    <td><p class="card-text">@client.PhoneNumber</p></td>
+                </tr>
+                <tr>
+                    <td><p class="card-text"><b>Email address: </b></p></td>
+                    <td><p class="card-text">@client.EmailAddress</p></td>
+                </tr>
+                <tr>
+                    <td><p class="card-text"><b>CNP: </b></p></td>
+                    <td><p class="card-text">@client.CNP</p></td>
+                </tr>
+                <tr>
+                    <td><p class="card-text"><b>Address: </b></p></td>
+                    <td><p class="card-text">@client.Address</p></td>
+                </tr>
+                <tr>
+                    <td><p class="card-text"><b>Number of passes: </b></p></td>
+                    <td><p class="card-text">@client.NumberOfPasses</p></td>
+                </tr>
+                <tr>
+                    <td><p class="card-text"><b>Has active pass: </b></p></td>
+                    <td><p class="card-text" style="color:@hasActivePassColor;"><b>@client.HasActivePassBool</b></p></td>
+                </tr>
+                <tr>
+                    <td><p class="card-text"><b>Pass expiration: </b></p></td>
+                    <td><p class="card-text">@client.PassExpiration</p></td>
+                </tr>
+                <tr>
+                    <td><p class="card-text"><b>Notes: </b></p></td>
+                    <td><p class="card-text">@client.Notes</p></td>
+                </tr>
+            </tbody>
+        </table>
+        <hr />
+        <button class="btn btn-outline-primary" @onclick="() => LetInClient(client)" style="margin: 10px;">Let in</button>
+        <button class="btn btn-warning" @onclick="() => ManagePasses(client)" style="margin: 10px;">Manage Passes</button>
     </div>
+</div>
 }
 
 @code{

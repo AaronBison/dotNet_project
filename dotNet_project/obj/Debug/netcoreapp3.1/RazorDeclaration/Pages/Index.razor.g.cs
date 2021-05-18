@@ -105,7 +105,7 @@ using dotNet_project.Models;
         }
         #pragma warning restore 1998
 #nullable restore
-#line 80 "D:\-EMTE-\4.ev\4_II\.NET\dotNet_project\dotNet_project\dotNet_project\Pages\Index.razor"
+#line 82 "D:\-EMTE-\4.ev\4_II\.NET\dotNet_project\dotNet_project\dotNet_project\Pages\Index.razor"
       
     private ClientBarCodeModel searchBarCode = new ClientBarCodeModel();
     private InfoClientModel client = new InfoClientModel();
